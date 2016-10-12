@@ -8,7 +8,7 @@ namespace luola
         public Destruction(DestructionType destructionType, Vector2 position, int damage, Entity owner)
         {
             DestructionType = destructionType;
-            Position = position - Vector2.One * DestructionType.Size / 2;
+            Position = position - Vector2.One*DestructionType.Size/2;
             Damage = damage;
             Owner = owner;
         }

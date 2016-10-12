@@ -21,7 +21,8 @@ namespace luola.weapons
 
     internal class PelletProjectile : Projectile
     {
-        public PelletProjectile(Game game, Vector2 position, Vector2 direction, Entity owner) : base(game, position, direction, owner)
+        public PelletProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
+            : base(game, position, direction, owner)
         {
             Damage = 3;
             DestructionSize = 7;

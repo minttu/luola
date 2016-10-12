@@ -19,7 +19,7 @@ namespace luola
             MaxHealth = Health;
             CollideOutside = true;
             Texture = game.Content.Load<Texture2D>("ship");
-            
+
             PrimaryWeapon = new PelletWeapon(this);
             SecondaryWeapon = new BombWeapon(this);
             // SecondaryWeapon = new MorningstarWeapon(this);
@@ -52,22 +52,23 @@ namespace luola
             Velocity += Vector2.UnitY/4;
             if (!_colliding)
             {
-                Position += Speed * Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                Position += Speed*Velocity*(float) gameTime.ElapsedGameTime.TotalSeconds;
             }
             _colliding = false;
-            
+
             Velocity *= 0.95f;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Rectangle, null, Color, _rotation, new Vector2(16f, 16f), SpriteEffects.None, 0.5f);
-            spriteBatch.Draw(LuolaGame.BaseTexture, new Rectangle((Position - (Vector2.One)).ToPoint(), new Point(2, 2)), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.51f);
+            spriteBatch.Draw(LuolaGame.BaseTexture, new Rectangle((Position - (Vector2.One)).ToPoint(), new Point(2, 2)),
+                null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.51f);
         }
 
         public void SetWantedMove(float thrust, float rotation)
         {
-            _rotation += rotation / 30;
+            _rotation += rotation/30;
             Velocity += Vector2.Transform(new Vector2(0, -thrust), Matrix.CreateRotationZ(_rotation));
         }
 
@@ -85,7 +86,7 @@ namespace luola
         {
             if (!weapon.CanActivate(gameTime))
                 return;
-            
+
             weapon.Activate(gameTime);
         }
 
@@ -100,7 +101,7 @@ namespace luola
         {
             if (Velocity.LengthSquared() > 50)
             {
-                TakeDamage((int)Velocity.LengthSquared()/50);
+                TakeDamage((int) Velocity.LengthSquared()/50);
             }
             Velocity = new Vector2(0, 0);
             _colliding = true;

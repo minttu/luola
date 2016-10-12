@@ -21,7 +21,7 @@ namespace luola
             if (Type == "detail")
                 return;
 
-            Colors = new Color[Width * Height];
+            Colors = new Color[Width*Height];
             Collisions = new bool[Width, Height];
 
             Texture.GetData(Colors);
@@ -30,7 +30,7 @@ namespace luola
             {
                 for (var x = 0; x < Width; x++)
                 {
-                    var solid = Colors[x + Width * y] != Color.Transparent;
+                    var solid = Colors[x + Width*y] != Color.Transparent;
                     Collisions[x, y] = solid;
                 }
             }

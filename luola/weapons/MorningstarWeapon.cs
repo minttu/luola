@@ -17,17 +17,17 @@ namespace luola.weapons
             int projectiles = 32;
             for (int i = 0; i < projectiles; i++)
             {
-                var dir = Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ((float) (Math.PI * 2 / projectiles * i)));
+                var dir = Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ((float) (Math.PI*2/projectiles*i)));
                 var projectile = new MorningstarProjectile(Owner.Game, Owner.Position, dir, Owner);
                 Owner.Match.AddEntity(projectile);
             }
-            
         }
     }
 
     internal class MorningstarProjectile : Projectile
     {
-        public MorningstarProjectile(Game game, Vector2 position, Vector2 direction, Entity owner) : base(game, position, direction, owner)
+        public MorningstarProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
+            : base(game, position, direction, owner)
         {
             Damage = 2;
             DestructionSize = 6;

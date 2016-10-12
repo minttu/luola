@@ -26,7 +26,7 @@ namespace luola
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (ExpiresAt < (float)gameTime.TotalGameTime.TotalSeconds)
+            if (ExpiresAt < (float) gameTime.TotalGameTime.TotalSeconds)
             {
                 IsAlive = false;
                 return;
@@ -41,14 +41,15 @@ namespace luola
             int height = Texture.Height;
             int frames = Texture.Width/height;
             int width = height;
-            float timePerFrame = Duration/(float)frames;
-            int iter = (int)Math.Floor((gameTime.TotalGameTime.TotalSeconds - CreatedAt)/timePerFrame);
+            float timePerFrame = Duration/(float) frames;
+            int iter = (int) Math.Floor((gameTime.TotalGameTime.TotalSeconds - CreatedAt)/timePerFrame);
             if (iter >= frames)
             {
                 IsAlive = false;
                 return;
             }
-            spriteBatch.Draw(Texture, new Rectangle(Position.ToPoint(), new Point(width, height)), new Rectangle(width * iter, 0, width, height), Color.White);
+            spriteBatch.Draw(Texture, new Rectangle(Position.ToPoint(), new Point(width, height)),
+                new Rectangle(width*iter, 0, width, height), Color.White);
         }
     }
 }

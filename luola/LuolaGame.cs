@@ -36,7 +36,6 @@ namespace luola
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _inputManager = new InputManager();
-            
         }
 
         private Map LoadMap(string name)
@@ -51,7 +50,7 @@ namespace luola
             {
                 layer.Texture = Content.Load<Texture2D>(Path.Combine("maps", name, layer.Image));
             }
-            
+
             return new Map(mapInfo.Layers)
             {
                 SpawnPoints = mapInfo.SpawnPoints
@@ -70,7 +69,7 @@ namespace luola
             _match.CreateShip(Color.Red);
 
             BaseTexture = new Texture2D(GraphicsDevice, 1, 1);
-            BaseTexture.SetData(new Color[] { Color.White });
+            BaseTexture.SetData(new Color[] {Color.White});
 
             Explosion32 = Content.Load<Texture2D>("explosions/32");
         }
@@ -84,7 +83,7 @@ namespace luola
         {
             base.Update(gameTime);
             _inputManager.Update(gameTime);
-            
+
             _inputManager.InputForShip(_match.Ships[0], 0);
             _inputManager.InputForShip(_match.Ships[1], 1);
 
@@ -94,34 +93,38 @@ namespace luola
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            
+
             _spriteBatch.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 0, 0);
 
             var mapHeight = _match.MapSize.X;
             var mapWidth = _match.MapSize.Y;
-            var each = _graphicsDeviceManager.PreferredBackBufferWidth / _match.Ships.Count;
+            var each = _graphicsDeviceManager.PreferredBackBufferWidth/_match.Ships.Count;
             each = Math.Min(each, mapWidth);
 
 
             for (var i = 0; i < _match.Ships.Count; i++)
             {
-                var viewportRect = new Rectangle(i*each, 0, each, Math.Min(mapHeight, _graphicsDeviceManager.PreferredBackBufferHeight));
+                var viewportRect = new Rectangle(i*each, 0, each,
+                    Math.Min(mapHeight, _graphicsDeviceManager.PreferredBackBufferHeight));
                 viewportRect.Inflate(-1, -1);
                 GraphicsDevice.Viewport = new Viewport(viewportRect);
                 var ship = _match.Ships[i];
                 var shipPos = ship.Position.ToPoint().ToVector2();
-                var cameraPos = -(shipPos - GraphicsDevice.Viewport.Bounds.Center.ToVector2()) - Vector2.UnitX * (i * each);
+                var cameraPos = -(shipPos - GraphicsDevice.Viewport.Bounds.Center.ToVector2()) - Vector2.UnitX*(i*each);
 
-                cameraPos = new Vector2(MathHelper.Clamp(cameraPos.X, -mapWidth + GraphicsDevice.Viewport.Width, 0f), MathHelper.Clamp(cameraPos.Y, -mapHeight + GraphicsDevice.Viewport.Height, 0f));
+                cameraPos = new Vector2(MathHelper.Clamp(cameraPos.X, -mapWidth + GraphicsDevice.Viewport.Width, 0f),
+                    MathHelper.Clamp(cameraPos.Y, -mapHeight + GraphicsDevice.Viewport.Height, 0f));
                 var transformMatrix = Matrix.CreateTranslation(new Vector3(cameraPos, 0f));
-                _spriteBatch.Begin(transformMatrix: transformMatrix, blendState: BlendState.NonPremultiplied, sortMode: SpriteSortMode.Deferred);
+                _spriteBatch.Begin(transformMatrix: transformMatrix, blendState: BlendState.NonPremultiplied,
+                    sortMode: SpriteSortMode.Deferred);
 
                 _match.Draw(gameTime, _spriteBatch, cameraPos);
 
                 _spriteBatch.End();
 
                 _spriteBatch.Begin();
-                _spriteBatch.Draw(BaseTexture, new Rectangle(0, 0, (int)(((float)ship.Health / (float)ship.MaxHealth) * each), 20), ship.Color);
+                _spriteBatch.Draw(BaseTexture,
+                    new Rectangle(0, 0, (int) (((float) ship.Health/(float) ship.MaxHealth)*each), 20), ship.Color);
                 _spriteBatch.End();
             }
         }

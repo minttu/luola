@@ -19,7 +19,6 @@ namespace luola
                 [0] = new Keys[] {Keys.Up, Keys.Left, Keys.Right, Keys.RightShift, Keys.Down},
                 [1] = new Keys[] {Keys.W, Keys.A, Keys.D, Keys.LeftShift, Keys.S}
             };
-
         }
 
         public void Update(GameTime gameTime)
@@ -57,6 +56,5 @@ namespace luola
 
             ship.SetWantedMove(thrust, rotation);
         }
-        
     }
 }

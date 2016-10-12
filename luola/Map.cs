@@ -41,7 +41,7 @@ namespace luola
         {
             foreach (var destruction in _destructions)
             {
-                if(destruction.DestructionType.Size == 32)
+                if (destruction.DestructionType.Size == 32)
                     Match.AddParticle(new Particle(gameTime, destruction.Position, LuolaGame.Explosion32));
                 for (var y = 0; y < destruction.DestructionType.Size; y++)
                 {
@@ -50,17 +50,16 @@ namespace luola
                         if (!destruction.DestructionType.EraseData[y, x])
                             continue;
 
-                        var rx = (int)Math.Floor(destruction.Position.X + x);
-                        var ry = (int)Math.Floor(destruction.Position.Y + y);
+                        var rx = (int) Math.Floor(destruction.Position.X + x);
+                        var ry = (int) Math.Floor(destruction.Position.Y + y);
                         if (rx < 0 || ry < 0 || rx >= Width || ry >= Height)
                             continue;
 
                         foreach (var ship in ships)
                         {
                             var point = ship.Position.ToPoint();
-                            if(point.X == rx && point.Y == ry && destruction.Owner != ship)
+                            if (point.X == rx && point.Y == ry && destruction.Owner != ship)
                                 ship.TakeDamage(destruction.Damage);
-
                         }
 
                         DynamicLayer.Colors[rx + ry*Width] = Color.Transparent;
@@ -77,9 +76,10 @@ namespace luola
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 cameraPos)
         {
             foreach (var layer in _layers)
-                spriteBatch.Draw(layer.Texture, cameraPos * -layer.Parallax, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0.01f);
+                spriteBatch.Draw(layer.Texture, cameraPos*-layer.Parallax, null, Color.White, 0f, Vector2.Zero, 1f,
+                    SpriteEffects.None, 0.01f);
         }
-        
+
         public void CheckCollisions(Entity entity)
         {
             var x = entity.PreviousPosition.X;
@@ -87,14 +87,15 @@ namespace luola
             var delta = (entity.Position - entity.PreviousPosition);
             var steps = delta.Length();
             var perStep = delta/steps;
-            
+
             for (var i = 0; i < steps; i++)
             {
                 x += perStep.X;
                 y += perStep.Y;
 
                 var overOfMap = x < 0 || y < 0 || x >= Width || y >= Height;
-                var hit = overOfMap || DynamicLayer.Collisions[(int)x, (int)y] || true == SolidLayer?.Collisions[(int)x, (int)y];
+                var hit = overOfMap || DynamicLayer.Collisions[(int) x, (int) y] ||
+                          true == SolidLayer?.Collisions[(int) x, (int) y];
 
                 if (!hit) continue;
 

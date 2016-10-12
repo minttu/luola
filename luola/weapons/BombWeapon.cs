@@ -21,7 +21,8 @@ namespace luola.weapons
 
     internal class BombProjectile : Projectile
     {
-        public BombProjectile(Game game, Vector2 position, Vector2 direction, Entity owner) : base(game, position, direction, owner)
+        public BombProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
+            : base(game, position, direction, owner)
         {
             Damage = 10;
             DestructionSize = 32;

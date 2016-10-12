@@ -62,10 +62,10 @@ namespace luola
                     foreach (var ship in Ships)
                     {
                         var bullet = (Projectile) entity;
-                        if(bullet.Owner == ship)
+                        if (bullet.Owner == ship)
                             continue;
 
-                        ship.CheckCollisions((Projectile)entity);
+                        ship.CheckCollisions((Projectile) entity);
                     }
                 }
             }
