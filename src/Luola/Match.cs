@@ -16,6 +16,7 @@ namespace Luola
 
         public Point MapSize => new Point(_map.Width, _map.Height);
         public List<Ship> Ships;
+        public List<Ship> AliveShips => Ships.FindAll(s => s.IsAlive);
 
         public Match(Game game, Map map)
         {
@@ -72,7 +73,7 @@ namespace Luola
                 if (entity is Ship)
                     continue;
 
-                foreach (var ship in Ships)
+                foreach (var ship in AliveShips)
                 {
                     var projectile = entity as Projectile;
                     if (projectile != null)
@@ -93,7 +94,7 @@ namespace Luola
             }
             _entities = _entities.FindAll((entity) => entity.IsAlive);
 
-            _map.Update(gameTime, Ships);
+            _map.Update(gameTime, AliveShips);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 cameraPos)

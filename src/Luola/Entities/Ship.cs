@@ -46,6 +46,9 @@ namespace Luola.Entities
 
         public override void Update(GameTime gameTime)
         {
+            if (!IsAlive)
+                return;
+
             PreviousPosition = Position;
             Velocity += Vector2.UnitY/4;
             if (!_colliding)
@@ -82,7 +85,7 @@ namespace Luola.Entities
 
         private void ActivateWeapon(GameTime gameTime, Weapon weapon)
         {
-            if (weapon == null || !weapon.CanActivate(gameTime))
+            if (!IsAlive || weapon == null || !weapon.CanActivate(gameTime))
                 return;
 
             weapon.Activate(gameTime);

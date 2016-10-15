@@ -45,7 +45,7 @@ namespace Luola
             rectangle = new Rectangle(0, 2,
                 (int) (((float) _ship.Health/(float) _ship.MaxHealth)*spriteBatch.GraphicsDevice.Viewport.Width), 20);
             spriteBatch.Draw(LuolaGame.BaseTexture, rectangle, Color.White);
-
+            
             spriteBatch.End();
         }
 
