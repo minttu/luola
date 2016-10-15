@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,9 +6,9 @@ namespace luola
 {
     public class DestructionType
     {
-        public Texture2D ExplosionTexture;
-        public bool[,] EraseData;
-        public int Size;
+        public readonly Texture2D ExplosionTexture;
+        public readonly bool[,] EraseData;
+        public readonly int Size;
 
         public DestructionType(Game game, int size)
         {

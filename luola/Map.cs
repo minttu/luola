@@ -70,7 +70,8 @@ namespace luola
                 }
             }
 
-            DynamicLayer.Texture.SetData(DynamicLayer.Colors);
+            if(_destructions.Count > 0)
+                DynamicLayer.Texture.SetData(DynamicLayer.Colors);
 
             _destructions.Clear();
         }
