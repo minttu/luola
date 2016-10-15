@@ -9,5 +9,5 @@ cave shooting / flying game
 
 ## building with mono
 
-    nuget restore luola.sln
+    nuget restore Luola.sln
     xbuild
