@@ -6,13 +6,13 @@ namespace Luola.Weapons
 {
     public class BombWeapon : Weapon
     {
+        public new static string Name = "bomb";
+        public new static float ChanceToAppear = 1f;
+
         public BombWeapon(Ship owner) : base(owner)
         {
             TimeBetweenActivations = 1f;
         }
-
-        public new static string Name = "bomb";
-        public new static float ChanceToAppear = 1f;
 
         public override void Activate(GameTime gameTime)
         {

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Luola
 {
     public class DestructionTypeManager
     {
         private readonly Dictionary<int, DestructionType> _destructionTypes;
-        private Game _game;
+        private readonly Game _game;
 
         public DestructionTypeManager(Game game)
         {

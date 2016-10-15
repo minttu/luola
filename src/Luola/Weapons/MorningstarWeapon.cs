@@ -7,19 +7,19 @@ namespace Luola.Weapons
 {
     public class MorningstarWeapon : Weapon
     {
+        public new static string Name = "morningstar";
+        public new static float ChanceToAppear = 1f;
+
         public MorningstarWeapon(Ship owner) : base(owner)
         {
             TimeBetweenActivations = 1f;
         }
 
-        public new static string Name = "morningstar";
-        public new static float ChanceToAppear = 1f;
-
         public override void Activate(GameTime gameTime)
         {
             base.Activate(gameTime);
-            int projectiles = 32;
-            for (int i = 0; i < projectiles; i++)
+            var projectiles = 32;
+            for (var i = 0; i < projectiles; i++)
             {
                 var dir = Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ((float) (Math.PI*2/projectiles*i)));
                 var projectile = new MorningstarProjectile(Owner.Game, Owner.Position, dir, Owner);

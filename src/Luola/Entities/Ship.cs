@@ -6,6 +6,9 @@ namespace Luola.Entities
 {
     public class Ship : Entity
     {
+        private bool _colliding;
+        private float _rotation;
+
         public Ship(Game game, Color color, Vector2 position) : base(game)
         {
             Position = position;
@@ -28,7 +31,7 @@ namespace Luola.Entities
         private Weapon PrimaryWeapon { get; set; }
         private Weapon SecondaryWeapon { get; set; }
 
-        public Color Color { get; private set; }
+        public Color Color { get; }
         public int Health { get; private set; }
         public int MaxHealth { get; private set; }
 
@@ -41,9 +44,6 @@ namespace Luola.Entities
             get { return new Rectangle(Position.ToPoint(), new Point(32, 32)); }
         }
 
-        private bool _colliding;
-        private float _rotation;
-
         public override void Update(GameTime gameTime)
         {
             if (!IsAlive)
@@ -52,9 +52,7 @@ namespace Luola.Entities
             PreviousPosition = Position;
             Velocity += Vector2.UnitY/4;
             if (!_colliding)
-            {
                 Position += Speed*Velocity*(float) gameTime.ElapsedGameTime.TotalSeconds;
-            }
             _colliding = false;
 
             Velocity *= 0.95f;
@@ -63,7 +61,7 @@ namespace Luola.Entities
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Rectangle, null, Color, _rotation, new Vector2(16f, 16f), SpriteEffects.None, 0.5f);
-            spriteBatch.Draw(LuolaGame.BaseTexture, new Rectangle((Position - (Vector2.One)).ToPoint(), new Point(2, 2)),
+            spriteBatch.Draw(LuolaGame.BaseTexture, new Rectangle((Position - Vector2.One).ToPoint(), new Point(2, 2)),
                 null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.51f);
         }
 
@@ -85,7 +83,7 @@ namespace Luola.Entities
 
         private void ActivateWeapon(GameTime gameTime, Weapon weapon)
         {
-            if (!IsAlive || weapon == null || !weapon.CanActivate(gameTime))
+            if (!IsAlive || (weapon == null) || !weapon.CanActivate(gameTime))
                 return;
 
             weapon.Activate(gameTime);
@@ -101,9 +99,7 @@ namespace Luola.Entities
         public override void Collided(float x, float y)
         {
             if (Velocity.LengthSquared() > 50)
-            {
                 TakeDamage((int) Velocity.LengthSquared()/50);
-            }
             Velocity = new Vector2(0, 0);
             _colliding = true;
             Position = new Vector2(x, y);
@@ -127,12 +123,10 @@ namespace Luola.Entities
 
             var weapon = pickup.CreateWeaponFor(this);
             if (weapon != null)
-            {
                 if (weapon.Primary)
                     PrimaryWeapon = weapon;
                 else
                     SecondaryWeapon = weapon;
-            }
             pickup.Kill();
         }
     }

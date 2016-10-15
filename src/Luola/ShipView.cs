@@ -6,8 +6,8 @@ namespace Luola
 {
     public class ShipView
     {
-        private readonly Ship _ship;
         private readonly Game _game;
+        private readonly Ship _ship;
 
         public ShipView(Game game, Ship ship)
         {
@@ -38,14 +38,17 @@ namespace Luola
 
         private void DrawHud(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             var rectangle = new Rectangle(0, 0, spriteBatch.GraphicsDevice.Viewport.Width, 24);
             spriteBatch.Draw(LuolaGame.BaseTexture, rectangle, Color.Black);
             rectangle = new Rectangle(0, 2,
-                (int) (((float) _ship.Health/(float) _ship.MaxHealth)*spriteBatch.GraphicsDevice.Viewport.Width), 20);
+                (int) (_ship.Health/(float) _ship.MaxHealth*spriteBatch.GraphicsDevice.Viewport.Width), 20);
             spriteBatch.Draw(LuolaGame.BaseTexture, rectangle, Color.White);
-            
+
+            LuolaGame.FontManager.DrawText(spriteBatch, _ship.Health + "/" + _ship.MaxHealth,
+                new Vector2(spriteBatch.GraphicsDevice.Viewport.Width/2, 11), Color.Black, 2f, 0);
+
             spriteBatch.End();
         }
 

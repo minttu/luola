@@ -6,6 +6,13 @@ namespace Luola
 {
     public class Particle
     {
+        public readonly float CreatedAt;
+        public readonly bool IsAnimated;
+        public readonly Texture2D Texture;
+        public float Duration;
+        public bool IsAlive;
+        public Vector2 Position;
+
         public Particle(GameTime gameTime, Vector2 position, Texture2D texture)
         {
             CreatedAt = (float) gameTime.TotalGameTime.TotalSeconds;
@@ -16,12 +23,6 @@ namespace Luola
             Texture = texture;
         }
 
-        public readonly float CreatedAt;
-        public readonly Texture2D Texture;
-        public readonly bool IsAnimated;
-        public Vector2 Position;
-        public bool IsAlive;
-        public float Duration;
         public float ExpiresAt => CreatedAt + Duration;
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -38,11 +39,11 @@ namespace Luola
                 return;
             }
 
-            int height = Texture.Height;
-            int frames = Texture.Width/height;
-            int width = height;
-            float timePerFrame = Duration/(float) frames;
-            int iter = (int) Math.Floor((gameTime.TotalGameTime.TotalSeconds - CreatedAt)/timePerFrame);
+            var height = Texture.Height;
+            var frames = Texture.Width/height;
+            var width = height;
+            var timePerFrame = Duration/frames;
+            var iter = (int) Math.Floor((gameTime.TotalGameTime.TotalSeconds - CreatedAt)/timePerFrame);
             if (iter >= frames)
             {
                 IsAlive = false;

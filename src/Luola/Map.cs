@@ -8,20 +8,18 @@ namespace Luola
 {
     public class Map
     {
-        private List<MapLayerData> _layers;
         private readonly List<Destruction> _destructions;
+        private readonly List<MapLayerData> _layers;
 
         public Map(List<MapLayerData> layers)
         {
             _layers = layers;
-            SolidLayer = _layers.Find((layer) => layer.Type == "solid");
-            DynamicLayer = _layers.Find((layer) => layer.Type == "dynamic");
+            SolidLayer = _layers.Find(layer => layer.Type == "solid");
+            DynamicLayer = _layers.Find(layer => layer.Type == "dynamic");
             Width = layers[0].Width;
             Height = layers[0].Height;
             foreach (var layer in layers)
-            {
                 layer.CalculateCollisions();
-            }
             _destructions = new List<Destruction>();
         }
 
@@ -48,7 +46,6 @@ namespace Luola
                     Match.AddParticle(particle);
 
                 for (var y = 0; y < destruction.DestructionType.Size; y++)
-                {
                     for (var x = 0; x < destruction.DestructionType.Size; x++)
                     {
                         if (!destruction.DestructionType.EraseData[y, x])
@@ -56,20 +53,19 @@ namespace Luola
 
                         var rx = (int) Math.Floor(destruction.Position.X + x);
                         var ry = (int) Math.Floor(destruction.Position.Y + y);
-                        if (rx < 0 || ry < 0 || rx >= Width || ry >= Height)
+                        if ((rx < 0) || (ry < 0) || (rx >= Width) || (ry >= Height))
                             continue;
 
                         foreach (var ship in ships)
                         {
                             var point = ship.Position.ToPoint();
-                            if (point.X == rx && point.Y == ry && destruction.Owner != ship)
+                            if ((point.X == rx) && (point.Y == ry) && (destruction.Owner != ship))
                                 ship.TakeDamage(destruction.Damage);
                         }
 
                         DynamicLayer.Colors[rx + ry*Width] = Color.Transparent;
                         DynamicLayer.Collisions[rx, ry] = false;
                     }
-                }
             }
 
             if (_destructions.Count > 0)
@@ -89,7 +85,7 @@ namespace Luola
         {
             var x = entity.PreviousPosition.X;
             var y = entity.PreviousPosition.Y;
-            var delta = (entity.Position - entity.PreviousPosition);
+            var delta = entity.Position - entity.PreviousPosition;
             var steps = delta.Length();
             var perStep = delta/steps;
 
@@ -98,9 +94,9 @@ namespace Luola
                 x += perStep.X;
                 y += perStep.Y;
 
-                var overOfMap = x < 0 || y < 0 || x >= Width || y >= Height;
+                var overOfMap = (x < 0) || (y < 0) || (x >= Width) || (y >= Height);
                 var hit = overOfMap || DynamicLayer.Collisions[(int) x, (int) y] ||
-                          true == SolidLayer?.Collisions[(int) x, (int) y];
+                          (true == SolidLayer?.Collisions[(int) x, (int) y]);
 
                 if (!hit) continue;
 
@@ -113,6 +109,12 @@ namespace Luola
                 entity.Collided(x, y);
                 return;
             }
+        }
+
+        public void Dispose()
+        {
+            foreach (var layer in _layers)
+                layer.Dispose();
         }
     }
 }

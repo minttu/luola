@@ -63,8 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FontManager.cs" />
     <Compile Include="MatchScene.cs" />
     <Compile Include="Entities\Pickup.cs" />
+    <Compile Include="MenuItem.cs" />
+    <Compile Include="MenuScene.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="ShipView.cs" />
     <Compile Include="Weapons\BombWeapon.cs" />
@@ -90,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\explosions\32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\font.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\pickup.png">

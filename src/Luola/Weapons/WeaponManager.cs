@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Luola.Entities;
-using Luola.Weapons;
 
-namespace luola.Weapons
+namespace Luola.Weapons
 {
     public class WeaponManager
     {
-        private readonly Dictionary<String, Tuple<float, Type>> _weaponTypes;
         private readonly Random _random;
-        private float _totalChanceToAppear;
+        private readonly Dictionary<string, Tuple<float, Type>> _weaponTypes;
+        private readonly float _totalChanceToAppear;
 
         public WeaponManager()
         {
@@ -48,7 +47,7 @@ namespace luola.Weapons
         public Weapon InitWeapon(string name, Ship ship)
         {
             var cls = _weaponTypes[name].Item2;
-            ConstructorInfo ctor = cls.GetConstructor(new[] {typeof(Ship)});
+            var ctor = cls.GetConstructor(new[] {typeof(Ship)});
 
             if (ctor == null)
                 return null;

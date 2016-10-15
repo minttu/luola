@@ -6,14 +6,14 @@ namespace Luola.Weapons
 {
     public class PelletWeapon : Weapon
     {
+        public new static string Name = "pellet";
+        public new static float ChanceToAppear = 0f;
+
         public PelletWeapon(Ship owner) : base(owner)
         {
             TimeBetweenActivations = 0;
             Primary = true;
         }
-
-        public new static string Name = "pellet";
-        public new static float ChanceToAppear = 0f;
 
         public override void Activate(GameTime gameTime)
         {

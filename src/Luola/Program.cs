@@ -2,12 +2,12 @@
 
 namespace Luola
 {
-    class Program
+    internal class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            LuolaGame luolaGame = new LuolaGame();
+            var luolaGame = new LuolaGame();
             luolaGame.Run();
             luolaGame.Dispose();
         }

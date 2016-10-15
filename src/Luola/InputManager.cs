@@ -7,18 +7,20 @@ namespace Luola
 {
     public class InputManager
     {
-        private KeyboardState _oldKeyboardState;
-        private KeyboardState _keyboardState;
-        private Dictionary<int, Keys[]> _playerKeys;
         private GameTime _gameTime;
+        private KeyboardState _keyboardState;
+        private KeyboardState _oldKeyboardState;
+        private readonly Dictionary<int, Keys[]> _playerKeys;
 
         public InputManager()
         {
             _oldKeyboardState = Keyboard.GetState();
             _playerKeys = new Dictionary<int, Keys[]>
             {
-                [0] = new Keys[] {Keys.Up, Keys.Left, Keys.Right, Keys.RightShift, Keys.Down},
-                [1] = new Keys[] {Keys.W, Keys.A, Keys.D, Keys.LeftShift, Keys.S}
+                [0] = new[] {Keys.Up, Keys.Left, Keys.Right, Keys.RightShift, Keys.Down},
+                [1] = new[] {Keys.W, Keys.A, Keys.D, Keys.LeftShift, Keys.S},
+                [2] = new[] {Keys.Y, Keys.G, Keys.J, Keys.F, Keys.H},
+                [3] = new[] {Keys.L, Keys.OemComma, Keys.OemQuestion, Keys.M, Keys.OemPeriod}
             };
         }
 
@@ -44,15 +46,18 @@ namespace Luola
             var rotation = 0f;
             var thrust = 0f;
 
-            if (this.IsKeyDown(_playerKeys[index][0]))
+            if (index >= _playerKeys.Count)
+                return;
+
+            if (IsKeyDown(_playerKeys[index][0]))
                 thrust = 1f;
-            if (this.IsKeyDown(_playerKeys[index][1]))
+            if (IsKeyDown(_playerKeys[index][1]))
                 rotation = -1f;
-            if (this.IsKeyDown(_playerKeys[index][2]))
+            if (IsKeyDown(_playerKeys[index][2]))
                 rotation = 1f;
-            if (this.IsKeyNewlyDown(_playerKeys[index][3]))
+            if (IsKeyNewlyDown(_playerKeys[index][3]))
                 ship.ActivatePrimaryWeapon(_gameTime);
-            if (this.IsKeyNewlyDown(_playerKeys[index][4]))
+            if (IsKeyNewlyDown(_playerKeys[index][4]))
                 ship.ActivateSecondaryWeapon(_gameTime);
 
             ship.SetWantedMove(thrust, rotation);

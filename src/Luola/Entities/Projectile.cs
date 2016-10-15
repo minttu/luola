@@ -29,7 +29,7 @@ namespace Luola.Entities
         }
 
         protected Vector2 Velocity { get; set; }
-        public Entity Owner { get; private set; }
+        public Entity Owner { get; }
         protected Texture2D Texture { get; set; }
         protected Vector2 Direction { get; set; }
 
@@ -41,7 +41,7 @@ namespace Luola.Entities
         public override void Update(GameTime gameTime)
         {
             PreviousPosition = Position;
-            Velocity += (Vector2.UnitY/4*Weight);
+            Velocity += Vector2.UnitY/4*Weight;
             Position += Velocity*(float) gameTime.ElapsedGameTime.TotalSeconds;
             Velocity *= 0.999f;
         }

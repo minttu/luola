@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using luola.Weapons;
+﻿using Luola.Weapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Newtonsoft.Json;
 
 namespace Luola
 {
     public class LuolaGame : Game
     {
-        public readonly GraphicsDeviceManager GraphicsDeviceManager;
-
-        private SpriteBatch _spriteBatch;
         public static Texture2D BaseTexture;
         public static DestructionTypeManager DestructionTypeManager;
         public static WeaponManager WeaponManager;
+        public static FontManager FontManager;
+        public static InputManager InputManager;
+        public readonly GraphicsDeviceManager GraphicsDeviceManager;
 
-        public Scene Scene { get; set; }
+        private SpriteBatch _spriteBatch;
 
         public LuolaGame()
         {
@@ -30,6 +23,8 @@ namespace Luola
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
+
+        public Scene Scene { get; set; }
 
         protected override void Initialize()
         {
@@ -42,14 +37,15 @@ namespace Luola
         {
             base.LoadContent();
 
-            DestructionTypeManager = new DestructionTypeManager(this);
-
             BaseTexture = new Texture2D(GraphicsDevice, 1, 1);
             BaseTexture.SetData(new[] {Color.White});
 
+            DestructionTypeManager = new DestructionTypeManager(this);
             WeaponManager = new WeaponManager();
-
-            Scene = new MatchScene(this);
+            FontManager = new FontManager(this);
+            InputManager = new InputManager();
+            Scene = new MenuScene(this);
+            //Scene = new MatchScene(this);
         }
 
         protected override void Dispose(bool disposing)
@@ -60,6 +56,7 @@ namespace Luola
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            InputManager.Update(gameTime);
             Scene.Update(gameTime);
         }
 

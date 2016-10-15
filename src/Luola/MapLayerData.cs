@@ -27,13 +27,16 @@ namespace Luola
             Texture.GetData(Colors);
 
             for (var y = 0; y < Height; y++)
-            {
                 for (var x = 0; x < Width; x++)
                 {
                     var solid = Colors[x + Width*y] != Color.Transparent;
                     Collisions[x, y] = solid;
                 }
-            }
+        }
+
+        public void Dispose()
+        {
+            Texture.Dispose();
         }
     }
 }

@@ -5,6 +5,8 @@ namespace Luola.Weapons
 {
     public abstract class Weapon
     {
+        public static string Name = "n/a";
+        public static float ChanceToAppear = 0;
         private float _lastActivated;
 
         public Weapon(Ship owner)
@@ -17,8 +19,6 @@ namespace Luola.Weapons
         protected float TimeBetweenActivations { get; set; }
         protected Ship Owner { get; private set; }
         public bool Primary { get; protected set; }
-        public static string Name = "n/a";
-        public static float ChanceToAppear = 0;
 
         public virtual void Activate(GameTime gameTime)
         {

@@ -7,12 +7,12 @@ namespace Luola.Entities
 {
     public class Pickup : Entity
     {
-        private readonly Texture2D _texture;
-        public bool Active;
-        private float _pickupTime;
-        private readonly float _respawnTime;
-        private string _weaponName;
         private readonly Vector2 _originalPosition;
+        private readonly float _respawnTime;
+        private readonly Texture2D _texture;
+        private float _pickupTime;
+        private string _weaponName;
+        public bool Active;
 
         public Pickup(Game game, Vector2 position) : base(game)
         {
@@ -33,7 +33,6 @@ namespace Luola.Entities
         public override void Update(GameTime gameTime)
         {
             if (!Active)
-            {
                 if (_pickupTime == -1)
                 {
                     _pickupTime = (float) gameTime.TotalGameTime.TotalSeconds;
@@ -41,16 +40,11 @@ namespace Luola.Entities
                 else
                 {
                     if (_pickupTime + _respawnTime < (float) gameTime.TotalGameTime.TotalSeconds)
-                    {
                         Activate();
-                    }
                 }
-            }
 
             if (Active)
-            {
                 Position = _originalPosition + Vector2.UnitY*(float) Math.Sin(gameTime.TotalGameTime.TotalSeconds*2)*10;
-            }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

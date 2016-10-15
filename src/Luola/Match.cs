@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Luola.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Luola.Entities;
 
 namespace Luola
 {
@@ -12,11 +12,8 @@ namespace Luola
         private readonly Map _map;
         private List<Entity> _entities;
         private List<Particle> _particles;
-        private Random _random;
-
-        public Point MapSize => new Point(_map.Width, _map.Height);
+        private readonly Random _random;
         public List<Ship> Ships;
-        public List<Ship> AliveShips => Ships.FindAll(s => s.IsAlive);
 
         public Match(Game game, Map map)
         {
@@ -30,6 +27,9 @@ namespace Luola
 
             CreatePickups();
         }
+
+        public Point MapSize => new Point(_map.Width, _map.Height);
+        public List<Ship> AliveShips => Ships.FindAll(s => s.IsAlive);
 
         public void AddParticle(Particle particle)
         {
@@ -66,7 +66,7 @@ namespace Luola
 
         public void Update(GameTime gameTime)
         {
-            foreach (Entity entity in _entities)
+            foreach (var entity in _entities)
             {
                 entity.Update(gameTime);
                 _map.CheckCollisions(entity);
@@ -86,13 +86,11 @@ namespace Luola
                     }
 
                     var pickup = entity as Pickup;
-                    if (pickup != null && pickup.Active)
-                    {
+                    if ((pickup != null) && pickup.Active)
                         ship.CheckCollisionsWithPickup(pickup);
-                    }
                 }
             }
-            _entities = _entities.FindAll((entity) => entity.IsAlive);
+            _entities = _entities.FindAll(entity => entity.IsAlive);
 
             _map.Update(gameTime, AliveShips);
         }
@@ -100,16 +98,17 @@ namespace Luola
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 cameraPos)
         {
             _map.Draw(gameTime, spriteBatch, cameraPos);
-            foreach (Entity entity in _entities)
-            {
+            foreach (var entity in _entities)
                 entity.Draw(gameTime, spriteBatch);
-            }
 
             foreach (var particle in _particles)
-            {
                 particle.Draw(gameTime, spriteBatch);
-            }
-            _particles = _particles.FindAll((particle => particle.IsAlive));
+            _particles = _particles.FindAll(particle => particle.IsAlive);
+        }
+
+        public void Dispose()
+        {
+            _map.Dispose();
         }
     }
 }
