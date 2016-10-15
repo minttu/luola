@@ -13,14 +13,17 @@ namespace luola
             Owner = owner;
         }
 
-        public Entity Owner { get; private set; }
-        public int Damage { get; private set; }
-        public Vector2 Position { get; private set; }
-        public DestructionType DestructionType { get; private set; }
+        public Entity Owner { get; }
+        public int Damage { get; }
+        public Vector2 Position { get; }
+        public DestructionType DestructionType { get; }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public Particle CreateParticle(GameTime gameTime)
         {
-            spriteBatch.Draw(DestructionType.Texture, Position, Color.Magenta);
+            if (DestructionType.ExplosionTexture == null)
+                return null;
+
+            return new Particle(gameTime, Position, DestructionType.ExplosionTexture);
         }
     }
 }

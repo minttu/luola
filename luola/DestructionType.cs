@@ -1,19 +1,19 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.IO;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace luola
 {
     public class DestructionType
     {
-        public Texture2D Texture;
+        public Texture2D ExplosionTexture;
         public bool[,] EraseData;
         public int Size;
 
-        public DestructionType(GraphicsDevice graphicsDevice, int size)
+        public DestructionType(Game game, int size)
         {
             Size = size;
-            Texture = new Texture2D(graphicsDevice, size, size);
-            var data = new Color[size*size];
             EraseData = new bool[size, size];
             float diam = size/2f;
             float diamsq = diam*diam;
@@ -24,11 +24,17 @@ namespace luola
                     var pos = new Vector2(x - diam, y - diam);
                     var solid = pos.LengthSquared() <= diamsq;
                     EraseData[y, x] = solid;
-                    data[y*size + x] = solid ? Color.White : Color.Transparent;
                 }
             }
 
-            Texture.SetData(data);
+            try
+            {
+                ExplosionTexture = game.Content.Load<Texture2D>("explosions/" + size);
+            }
+            catch (ContentLoadException)
+            {
+                ExplosionTexture = null;
+            }
         }
     }
 }

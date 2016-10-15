@@ -12,12 +12,11 @@ namespace luola
 {
     public class LuolaGame : Game
     {
-        private GraphicsDeviceManager _graphicsDeviceManager;
+        private readonly GraphicsDeviceManager _graphicsDeviceManager;
         private InputManager _inputManager;
         private SpriteBatch _spriteBatch;
         private Match _match;
 
-        public static Texture2D Explosion32;
         public static Texture2D BaseTexture;
         public static DestructionTypeManager DestructionTypeManager;
 
@@ -61,7 +60,7 @@ namespace luola
         {
             base.LoadContent();
 
-            DestructionTypeManager = new DestructionTypeManager(GraphicsDevice);
+            DestructionTypeManager = new DestructionTypeManager(this);
 
             var map = LoadMap("a1");
             _match = new Match(this, map);
@@ -70,8 +69,6 @@ namespace luola
 
             BaseTexture = new Texture2D(GraphicsDevice, 1, 1);
             BaseTexture.SetData(new Color[] {Color.White});
-
-            Explosion32 = Content.Load<Texture2D>("explosions/32");
         }
 
         protected override void Dispose(bool disposing)

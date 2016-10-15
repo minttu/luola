@@ -1,23 +1,24 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace luola
 {
     public class DestructionTypeManager
     {
-        private readonly GraphicsDevice _graphicsDevice;
         private readonly Dictionary<int, DestructionType> _destructionTypes;
+        private Game _game;
 
-        public DestructionTypeManager(GraphicsDevice graphicsDevice)
+        public DestructionTypeManager(Game game)
         {
-            _graphicsDevice = graphicsDevice;
+            _game = game;
             _destructionTypes = new Dictionary<int, DestructionType>();
         }
 
         public DestructionType GetDestructionType(int size)
         {
             if (!_destructionTypes.ContainsKey(size))
-                _destructionTypes[size] = new DestructionType(_graphicsDevice, size);
+                _destructionTypes[size] = new DestructionType(_game, size);
 
             return _destructionTypes[size];
         }

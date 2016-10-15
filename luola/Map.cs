@@ -41,8 +41,10 @@ namespace luola
         {
             foreach (var destruction in _destructions)
             {
-                if (destruction.DestructionType.Size == 32)
-                    Match.AddParticle(new Particle(gameTime, destruction.Position, LuolaGame.Explosion32));
+                var particle = destruction.CreateParticle(gameTime);
+                if(particle != null)
+                    Match.AddParticle(particle);
+
                 for (var y = 0; y < destruction.DestructionType.Size; y++)
                 {
                     for (var x = 0; x < destruction.DestructionType.Size; x++)
