@@ -6,3 +6,8 @@ cave shooting / flying game
 
 * MonoGame
 * Json.NET
+
+## building with mono
+
+    nuget restore luola.sln
+    xbuild
