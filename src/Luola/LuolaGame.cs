@@ -9,9 +9,11 @@
 
 #endregion
 
+using System;
 using Luola.Weapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Luola
 {
@@ -29,13 +31,19 @@ namespace Luola
         public LuolaGame()
         {
             GraphicsDeviceManager = new GraphicsDeviceManager(this);
-            GraphicsDeviceManager.PreferredBackBufferWidth = 1000;
-            GraphicsDeviceManager.PreferredBackBufferHeight = 1000;
+            Window.AllowUserResizing = true;
+            Window.ClientSizeChanged += ClientSizeChanged;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
         public Scene Scene { get; set; }
+
+        private void ClientSizeChanged(object sender, EventArgs e)
+        {
+            GraphicsDeviceManager.PreferredBackBufferHeight = Window.ClientBounds.Height;
+            GraphicsDeviceManager.PreferredBackBufferWidth = Window.ClientBounds.Width;
+        }
 
         protected override void Initialize()
         {
@@ -48,6 +56,10 @@ namespace Luola
         {
             base.LoadContent();
 
+            GraphicsDeviceManager.PreferredBackBufferHeight = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Height/2;
+            GraphicsDeviceManager.PreferredBackBufferWidth = GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width/2;
+            GraphicsDeviceManager.ApplyChanges();
+
             BaseTexture = new Texture2D(GraphicsDevice, 1, 1);
             BaseTexture.SetData(new[] {Color.White});
 
@@ -56,7 +68,6 @@ namespace Luola
             FontManager = new FontManager(this);
             InputManager = new InputManager();
             Scene = new MenuScene(this);
-            //Scene = new MatchScene(this);
         }
 
         protected override void Dispose(bool disposing)
@@ -68,6 +79,29 @@ namespace Luola
         {
             base.Update(gameTime);
             InputManager.Update(gameTime);
+
+            if (InputManager.IsKeyNewlyDown(Keys.F11))
+            {
+                if (!GraphicsDeviceManager.IsFullScreen)
+                {
+                    GraphicsDeviceManager.PreferredBackBufferHeight =
+                        GraphicsDeviceManager.GraphicsDevice.DisplayMode.Height;
+                    GraphicsDeviceManager.PreferredBackBufferWidth =
+                        GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width;
+                    GraphicsDeviceManager.IsFullScreen = true;
+                }
+                else
+                {
+                    GraphicsDeviceManager.PreferredBackBufferHeight =
+                        GraphicsDeviceManager.GraphicsDevice.DisplayMode.Height/2;
+                    GraphicsDeviceManager.PreferredBackBufferWidth =
+                        GraphicsDeviceManager.GraphicsDevice.DisplayMode.Width/2;
+                    GraphicsDeviceManager.IsFullScreen = false;
+                }
+
+                GraphicsDeviceManager.ApplyChanges();
+            }
+
             Scene.Update(gameTime);
         }
 
