@@ -1,4 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region Copyright & License Information
+
+// Copyright 2016 Minttu Imberg
+// This file is part of luola, which is free software. It is made
+// available to you under the terms of the GNU General Public License
+// as published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version. For more
+// information, see LICENSE-CODE.
+
+#endregion
+
+using System.Collections.Generic;
 using Luola.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -7,10 +18,10 @@ namespace Luola
 {
     public class InputManager
     {
+        private readonly Dictionary<int, Keys[]> _playerKeys;
         private GameTime _gameTime;
         private KeyboardState _keyboardState;
         private KeyboardState _oldKeyboardState;
-        private readonly Dictionary<int, Keys[]> _playerKeys;
 
         public InputManager()
         {

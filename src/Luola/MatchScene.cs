@@ -1,4 +1,15 @@
-﻿using System;
+﻿#region Copyright & License Information
+
+// Copyright 2016 Minttu Imberg
+// This file is part of luola, which is free software. It is made
+// available to you under the terms of the GNU General Public License
+// as published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version. For more
+// information, see LICENSE-CODE.
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
@@ -10,8 +21,8 @@ namespace Luola
 {
     public class MatchScene : Scene
     {
-        private readonly List<ShipView> _shipViews;
         private readonly Match _match;
+        private readonly List<ShipView> _shipViews;
 
         public MatchScene(Game game, int players, string mapName) : base(game)
         {

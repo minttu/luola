@@ -1,4 +1,15 @@
-﻿using System;
+﻿#region Copyright & License Information
+
+// Copyright 2016 Minttu Imberg
+// This file is part of luola, which is free software. It is made
+// available to you under the terms of the GNU General Public License
+// as published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version. For more
+// information, see LICENSE-CODE.
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 using Luola.Entities;
 using Microsoft.Xna.Framework;
@@ -10,9 +21,9 @@ namespace Luola
     {
         private readonly Game _game;
         private readonly Map _map;
+        private readonly Random _random;
         private List<Entity> _entities;
         private List<Particle> _particles;
-        private readonly Random _random;
         public List<Ship> Ships;
 
         public Match(Game game, Map map)
