@@ -1,3 +1,5 @@
+using System;
+using Luola.Weapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,14 +11,23 @@ namespace Luola.Entities
         public bool Active;
         private float _pickupTime;
         private readonly float _respawnTime;
+        private string _weaponName;
+        private readonly Vector2 _originalPosition;
 
         public Pickup(Game game, Vector2 position) : base(game)
         {
             Position = position;
+            _originalPosition = position;
             _texture = game.Content.Load<Texture2D>("pickup");
-            Active = true;
             _respawnTime = 20f;
+            Activate();
+        }
+
+        private void Activate()
+        {
             _pickupTime = -1;
+            Active = true;
+            _weaponName = LuolaGame.WeaponManager.RandomWeaponName();
         }
 
         public override void Update(GameTime gameTime)
@@ -31,10 +42,14 @@ namespace Luola.Entities
                 {
                     if (_pickupTime + _respawnTime < (float) gameTime.TotalGameTime.TotalSeconds)
                     {
-                        _pickupTime = -1;
-                        Active = true;
+                        Activate();
                     }
                 }
+            }
+
+            if (Active)
+            {
+                Position = _originalPosition + Vector2.UnitY*(float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * 2) * 10;
             }
         }
 
@@ -49,6 +64,14 @@ namespace Luola.Entities
 
         public override void Collided(float x, float y)
         {
+        }
+
+        public Weapon CreateWeaponFor(Ship ship)
+        {
+            if (!Active)
+                return null;
+
+            return LuolaGame.WeaponManager.InitWeapon(_weaponName, ship);
         }
 
         public override void Kill()

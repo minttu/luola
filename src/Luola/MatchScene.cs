@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using luola.Weapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
@@ -10,6 +11,7 @@ namespace Luola
     public class MatchScene : Scene
     {
         private readonly InputManager _inputManager;
+        
         private Match _match;
         private readonly List<ShipView> _shipViews;
 
@@ -27,6 +29,7 @@ namespace Luola
 
             foreach (var ship in _match.Ships)
                 _shipViews.Add(new ShipView(Game, ship));
+            
         }
 
         private Map LoadMap(string name)

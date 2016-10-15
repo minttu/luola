@@ -11,11 +11,14 @@ namespace Luola.Weapons
         {
             _lastActivated = 0;
             Owner = owner;
+            Primary = false;
         }
 
         protected float TimeBetweenActivations { get; set; }
-
         protected Ship Owner { get; private set; }
+        public bool Primary { get; protected set; }
+        public static string Name = "n/a";
+        public static float ChanceToAppear = 0;
 
         public virtual void Activate(GameTime gameTime)
         {

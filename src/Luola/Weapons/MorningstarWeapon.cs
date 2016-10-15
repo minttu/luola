@@ -12,6 +12,9 @@ namespace Luola.Weapons
             TimeBetweenActivations = 1f;
         }
 
+        public new static string Name = "morningstar";
+        public new static float ChanceToAppear = 1f;
+
         public override void Activate(GameTime gameTime)
         {
             base.Activate(gameTime);

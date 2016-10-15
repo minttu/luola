@@ -20,9 +20,7 @@ namespace Luola.Entities
             CollideOutside = true;
             Texture = game.Content.Load<Texture2D>("ship");
 
-            PrimaryWeapon = new PelletWeapon(this);
-            SecondaryWeapon = new BombWeapon(this);
-            SecondaryWeapon = new MorningstarWeapon(this);
+            PrimaryWeapon = LuolaGame.WeaponManager.InitWeapon("pellet", this);
         }
 
         private Texture2D Texture { get; }
@@ -124,6 +122,14 @@ namespace Luola.Entities
             if (dist > 240)
                 return;
 
+            var weapon = pickup.CreateWeaponFor(this);
+            if (weapon != null)
+            {
+                if (weapon.Primary)
+                    PrimaryWeapon = weapon;
+                else
+                    SecondaryWeapon = weapon;
+            }
             pickup.Kill();
         }
     }

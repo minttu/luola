@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using luola.Weapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +18,7 @@ namespace Luola
         private SpriteBatch _spriteBatch;
         public static Texture2D BaseTexture;
         public static DestructionTypeManager DestructionTypeManager;
+        public static WeaponManager WeaponManager;
 
         public Scene Scene { get; set; }
 
@@ -43,7 +45,9 @@ namespace Luola
             DestructionTypeManager = new DestructionTypeManager(this);
 
             BaseTexture = new Texture2D(GraphicsDevice, 1, 1);
-            BaseTexture.SetData(new Color[] {Color.White});
+            BaseTexture.SetData(new[] {Color.White});
+
+            WeaponManager = new WeaponManager();
 
             Scene = new MatchScene(this);
         }
