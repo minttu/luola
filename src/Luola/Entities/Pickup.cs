@@ -49,7 +49,7 @@ namespace Luola.Entities
 
             if (Active)
             {
-                Position = _originalPosition + Vector2.UnitY*(float)Math.Sin(gameTime.TotalGameTime.TotalSeconds * 2) * 10;
+                Position = _originalPosition + Vector2.UnitY*(float) Math.Sin(gameTime.TotalGameTime.TotalSeconds*2)*10;
             }
         }
 

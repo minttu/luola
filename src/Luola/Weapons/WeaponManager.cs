@@ -12,6 +12,7 @@ namespace luola.Weapons
         private readonly Dictionary<String, Tuple<float, Type>> _weaponTypes;
         private readonly Random _random;
         private float _totalChanceToAppear;
+
         public WeaponManager()
         {
             _totalChanceToAppear = 0;
@@ -21,7 +22,7 @@ namespace luola.Weapons
             foreach (var weapon in weapons)
             {
                 var name = weapon.GetField("Name").GetValue(null) as string;
-                var chance = (float)weapon.GetField("ChanceToAppear").GetValue(null);
+                var chance = (float) weapon.GetField("ChanceToAppear").GetValue(null);
                 if (name != null)
                 {
                     _weaponTypes[name] = new Tuple<float, Type>(chance, weapon);
@@ -47,13 +48,12 @@ namespace luola.Weapons
         public Weapon InitWeapon(string name, Ship ship)
         {
             var cls = _weaponTypes[name].Item2;
-            ConstructorInfo ctor = cls.GetConstructor(new[] { typeof(Ship) });
+            ConstructorInfo ctor = cls.GetConstructor(new[] {typeof(Ship)});
 
             if (ctor == null)
                 return null;
 
             return (Weapon) ctor.Invoke(new object[] {ship});
         }
-        
     }
 }
