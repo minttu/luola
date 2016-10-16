@@ -104,7 +104,13 @@ namespace Luola.Entities
         {
             Health -= damage;
             if (Health <= 0)
-                IsAlive = false;
+                Kill();
+        }
+
+        public override void Kill()
+        {
+            base.Kill();
+            Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(64), Position, 20, this));
         }
 
         public override void Collided(float x, float y)
