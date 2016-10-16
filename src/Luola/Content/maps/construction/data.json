@@ -1,0 +1,25 @@
+﻿{
+  "Layers": [
+    {
+      "Image": "background.png",
+      "Parallax": 0.2,
+      "Type": "detail"
+    },
+    {
+      "Image": "dynamic.png",
+      "Type": "dynamic"
+    }
+  ],
+  "SpawnPoints": [
+    [350, 100],
+    [450, 100],
+    [550, 100],
+    [650, 100]
+  ],
+  "PickupPoints": [
+    [350, 400],
+    [450, 400],
+    [550, 400],
+    [650, 400]
+  ]
+}
