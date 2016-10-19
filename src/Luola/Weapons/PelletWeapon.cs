@@ -30,7 +30,7 @@ namespace Luola.Weapons
         {
             base.Activate(gameTime);
 
-            var projectile = new PelletProjectile(Owner.Game, Owner.Position, Owner.Direction, Owner);
+            var projectile = new PelletProjectile(Owner.Game, Owner.FrontPosition, Owner.Direction, Owner);
             Owner.Match.AddEntity(projectile);
         }
     }
@@ -44,6 +44,7 @@ namespace Luola.Weapons
             DestructionSize = 7;
             Speed = 400f;
             Texture = game.Content.Load<Texture2D>("weapons/pellet_projectile.png");
+            FriendlyFire = false;
         }
     }
 }

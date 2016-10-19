@@ -29,13 +29,9 @@ namespace Luola.Weapons
         public override void Activate(GameTime gameTime)
         {
             base.Activate(gameTime);
-            var projectiles = 32;
-            for (var i = 0; i < projectiles; i++)
-            {
-                var dir = Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ((float) (Math.PI*2/projectiles*i)));
-                var projectile = new MorningstarProjectile(Owner.Game, Owner.Position, dir, Owner);
-                Owner.Match.AddEntity(projectile);
-            }
+
+            var projectile = new MorningstarProjectile(Owner.Game, Owner.FrontPosition, Owner.Direction, Owner);
+            Owner.Match.AddEntity(projectile);
         }
     }
 
@@ -44,9 +40,34 @@ namespace Luola.Weapons
         public MorningstarProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
             : base(game, position, direction, owner)
         {
+            Damage = 20;
+            DestructionSize = 32;
+            Speed = 250f;
+            Texture = game.Content.Load<Texture2D>("weapons/morningstar_projectile.png");
+        }
+
+        public override void Kill()
+        {
+            const int projectiles = 32;
+            for (var i = 0; i < projectiles; i++)
+            {
+                var dir = Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ((float)(Math.PI * 2 / projectiles * i)));
+                var projectile = new MorningstarSubProjectile(Owner.Game, Position, dir, Owner);
+                Owner.Match.AddEntity(projectile);
+            }
+            base.Kill();
+        }
+    }
+
+    internal class MorningstarSubProjectile : Projectile
+    {
+        public MorningstarSubProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
+            : base(game, position, direction, owner)
+        {
             Damage = 2;
-            DestructionSize = 6;
+            DestructionSize = 4;
             Speed = 150f;
+            Weight = 10;
             Texture = game.Content.Load<Texture2D>("weapons/pellet_projectile.png");
         }
     }

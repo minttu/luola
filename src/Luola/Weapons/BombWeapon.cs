@@ -29,7 +29,7 @@ namespace Luola.Weapons
         {
             base.Activate(gameTime);
 
-            var projectile = new BombProjectile(Owner.Game, Owner.Position, Owner.Direction, Owner);
+            var projectile = new BombProjectile(Owner.Game, Owner.BackPosition, Owner.Direction, Owner);
             Owner.Match.AddEntity(projectile);
         }
     }

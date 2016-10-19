@@ -77,7 +77,7 @@ namespace Luola
 
         public void Update(GameTime gameTime)
         {
-            foreach (var entity in _entities)
+            foreach (var entity in _entities.ToArray())
             {
                 entity.Update(gameTime);
                 _map.CheckCollisions(entity);
@@ -90,7 +90,7 @@ namespace Luola
                     if (projectile != null)
                     {
                         var bullet = projectile;
-                        if (bullet.Owner == ship)
+                        if (!projectile.FriendlyFire && bullet.Owner == ship)
                             continue;
 
                         ship.CheckCollisionsWithProjectile(projectile);

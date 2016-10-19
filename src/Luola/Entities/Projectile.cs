@@ -27,6 +27,7 @@ namespace Luola.Entities
             DestructionSize = 1;
             Weight = 1;
             CollideOutside = false;
+            FriendlyFire = true;
         }
 
         public int Weight { get; set; }
@@ -43,6 +44,7 @@ namespace Luola.Entities
         public Entity Owner { get; }
         protected Texture2D Texture { get; set; }
         protected Vector2 Direction { get; set; }
+        public bool FriendlyFire { get; protected set; }
 
         private Rectangle Rectangle
             =>
@@ -64,9 +66,9 @@ namespace Luola.Entities
 
         public override void Collided(float x, float y)
         {
-            IsAlive = false;
+            Kill();
             Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(DestructionSize),
-                new Vector2(x, y), Damage, Owner));
+                new Vector2(x, y), Damage, Owner, FriendlyFire));
         }
     }
 }

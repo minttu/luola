@@ -49,6 +49,8 @@ namespace Luola.Entities
         public float Speed { get; set; }
         public Vector2 Velocity { get; private set; }
         public Vector2 Direction => Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ(_rotation));
+        public Vector2 FrontPosition => Position + 16*Direction;
+        public Vector2 BackPosition => Position - 16*Direction;
 
         public Rectangle Rectangle
         {
@@ -110,7 +112,7 @@ namespace Luola.Entities
         public override void Kill()
         {
             base.Kill();
-            Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(64), Position, 20, this));
+            Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(64), Position, 20, this, false));
         }
 
         public override void Collided(float x, float y)

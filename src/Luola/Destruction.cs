@@ -16,18 +16,20 @@ namespace Luola
 {
     public class Destruction
     {
-        public Destruction(DestructionType destructionType, Vector2 position, int damage, Entity owner)
+        public Destruction(DestructionType destructionType, Vector2 position, int damage, Entity owner, bool friendlyFire)
         {
             DestructionType = destructionType;
             Position = position - Vector2.One*DestructionType.Size/2;
             Damage = damage;
             Owner = owner;
+            FriendlyFire = friendlyFire;
         }
 
         public Entity Owner { get; }
         public int Damage { get; }
         public Vector2 Position { get; }
         public DestructionType DestructionType { get; }
+        public bool FriendlyFire { get; }
 
         public Particle CreateParticle(GameTime gameTime)
         {
