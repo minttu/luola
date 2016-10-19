@@ -53,10 +53,10 @@ namespace Luola
             entity.Match = this;
         }
 
-        public void CreateShip(Color color)
+        public void CreateShip(string name, Color color)
         {
             var spawnPoint = _map.SpawnPoints[_random.Next(0, _map.SpawnPoints.Count)];
-            var ship = new Ship(_game, color, new Vector2(spawnPoint[0], spawnPoint[1]));
+            var ship = new Ship(_game, name, color, new Vector2(spawnPoint[0], spawnPoint[1]));
             AddEntity(ship);
             Ships.Add(ship);
         }

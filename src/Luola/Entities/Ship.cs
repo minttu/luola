@@ -20,8 +20,9 @@ namespace Luola.Entities
         private bool _colliding;
         private float _rotation;
 
-        public Ship(Game game, Color color, Vector2 position) : base(game)
+        public Ship(Game game, string name, Color color, Vector2 position) : base(game)
         {
+            Name = name;
             Position = position;
             PreviousPosition = Position;
             Velocity = new Vector2(0, 0);
@@ -36,6 +37,8 @@ namespace Luola.Entities
 
             PrimaryWeapon = LuolaGame.WeaponManager.InitWeapon("pellet", this);
         }
+
+        public string Name { get; }
 
         private Texture2D Texture { get; }
 

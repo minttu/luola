@@ -31,9 +31,10 @@ namespace Luola
             var map = LoadMap(mapName);
             _match = new Match(Game, map);
             var playerColors = new[] {Color.Blue, Color.Red, Color.Green, Color.Yellow};
+            var playerNames = new[] {"Blue", "Red", "Green", "Yellow"};
 
             for (var i = 0; i < players; i++)
-                _match.CreateShip(playerColors[i]);
+                _match.CreateShip(playerNames[i], playerColors[i]);
 
             foreach (var ship in _match.Ships)
                 _shipViews.Add(new ShipView(Game, ship));
@@ -77,6 +78,11 @@ namespace Luola
                 LuolaGame.InputManager.InputForShip(_match.Ships[i], i);
 
             _match.Update(gameTime);
+
+            if(_match.AliveShips.Count == 1 && _match.Ships.Count > 1)
+                ChangeScene(new GameOverScene(Game, _match.AliveShips[0].Name));
+            if(_match.AliveShips.Count == 0)
+                ChangeScene(new GameOverScene(Game, ""));
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
