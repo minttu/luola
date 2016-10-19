@@ -30,7 +30,7 @@ namespace Luola.Weapons
         {
             base.Activate(gameTime);
 
-            var projectile = new PelletProjectile(Owner.Game, Owner.FrontPosition, Owner.Direction, Owner);
+            var projectile = new PelletProjectile(Owner.Game, Owner.Position, Owner.Direction, Owner);
             Owner.Match.AddEntity(projectile);
         }
     }

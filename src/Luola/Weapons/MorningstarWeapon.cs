@@ -23,7 +23,7 @@ namespace Luola.Weapons
 
         public MorningstarWeapon(Ship owner) : base(owner)
         {
-            TimeBetweenActivations = 1f;
+            TimeBetweenActivations = 1.5f;
         }
 
         public override void Activate(GameTime gameTime)
