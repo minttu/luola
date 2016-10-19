@@ -65,6 +65,8 @@ namespace Luola.Entities
 
             spriteBatch.Draw(_texture, Position, null, null, Vector2.One*6, 0f, null, Color.White, SpriteEffects.None,
                 0f);
+
+            LuolaGame.FontManager.DrawText(spriteBatch, _weaponName[0].ToString(), Position + Vector2.UnitX * 5, Color.White);
         }
 
         public override void Collided(float x, float y)
