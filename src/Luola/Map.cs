@@ -70,7 +70,8 @@ namespace Luola
                         foreach (var ship in ships)
                         {
                             var point = ship.Position.ToPoint();
-                            if ((point.X == rx) && (point.Y == ry) && (destruction.Owner != ship || destruction.FriendlyFire))
+                            if ((point.X == rx) && (point.Y == ry) &&
+                                ((destruction.Owner != ship) || destruction.FriendlyFire))
                                 ship.TakeDamage(destruction.Damage);
                         }
 

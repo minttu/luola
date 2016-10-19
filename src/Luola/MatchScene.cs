@@ -79,9 +79,9 @@ namespace Luola
 
             _match.Update(gameTime);
 
-            if(_match.AliveShips.Count == 1 && _match.Ships.Count > 1)
+            if ((_match.AliveShips.Count == 1) && (_match.Ships.Count > 1))
                 ChangeScene(new GameOverScene(Game, _match.AliveShips[0].Name));
-            if(_match.AliveShips.Count == 0)
+            if (_match.AliveShips.Count == 0)
                 ChangeScene(new GameOverScene(Game, ""));
         }
 

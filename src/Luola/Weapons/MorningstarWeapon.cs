@@ -51,7 +51,7 @@ namespace Luola.Weapons
             const int projectiles = 32;
             for (var i = 0; i < projectiles; i++)
             {
-                var dir = Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ((float)(Math.PI * 2 / projectiles * i)));
+                var dir = Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ((float) (Math.PI*2/projectiles*i)));
                 var projectile = new MorningstarSubProjectile(Owner.Game, Position, dir, Owner);
                 Owner.Match.AddEntity(projectile);
             }

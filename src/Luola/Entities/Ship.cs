@@ -115,7 +115,8 @@ namespace Luola.Entities
         public override void Kill()
         {
             base.Kill();
-            Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(64), Position, 20, this, false));
+            Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(64), Position, 20,
+                this, false));
         }
 
         public override void Collided(float x, float y)

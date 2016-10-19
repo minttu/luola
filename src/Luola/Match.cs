@@ -90,7 +90,7 @@ namespace Luola
                     if (projectile != null)
                     {
                         var bullet = projectile;
-                        if (!projectile.FriendlyFire && bullet.Owner == ship)
+                        if (!projectile.FriendlyFire && (bullet.Owner == ship))
                             continue;
 
                         ship.CheckCollisionsWithProjectile(projectile);
