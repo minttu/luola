@@ -95,7 +95,7 @@ namespace Luola
                 _itemSelection = Math.Min(_itemSelection + 1, _items.Count - 1);
             if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Up))
                 _itemSelection = Math.Max(_itemSelection - 1, 0);
-            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.RightShift))
+            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Enter))
                 _items[_itemSelection].Select();
             if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Escape))
                 if (_itemSelection != _items.Count - 1)

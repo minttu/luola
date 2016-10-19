@@ -39,7 +39,7 @@ namespace Luola
 
         public override void Update(GameTime gameTime)
         {
-            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.RightShift))
+            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Enter))
             {
                 ChangeScene(new MenuScene(Game));
             }
