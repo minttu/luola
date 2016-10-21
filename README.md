@@ -1,14 +1,21 @@
 # luola
 
-| [![AppVeyor branch](https://img.shields.io/appveyor/ci/minttu/luola/master.png?style=flat-square&label=windows%20build)](https://ci.appveyor.com/project/minttu/luola) | [![Travis branch](https://img.shields.io/travis/minttu/luola/master.png?style=flat-square&label=linux%20build)](https://travis-ci.org/minttu/luola) |
+| [![Windows build](https://img.shields.io/appveyor/ci/minttu/luola/master.png?style=flat-square&label=windows%20build)](https://ci.appveyor.com/project/minttu/luola) | [![Linux build](https://img.shields.io/travis/minttu/luola/master.png?style=flat-square&label=linux%20build)](https://travis-ci.org/minttu/luola) |
 | --- | --- |
 
 cave shooting / flying game
 
-## building with mono
+## building
 
-    nuget restore Luola.sln
+### mono
+
+    nuget restore
     xbuild
+
+### windows
+
+    nuget restore
+    msbuild
 
 ## license
 
