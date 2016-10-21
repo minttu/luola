@@ -64,14 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FontManager.cs" />
-    <Compile Include="GameOverScene.cs" />
+    <Compile Include="Scenes\GameOverScene.cs" />
     <Compile Include="MapPointData.cs" />
-    <Compile Include="MatchScene.cs" />
+    <Compile Include="Scenes\MatchScene.cs" />
     <Compile Include="Entities\Pickup.cs" />
-    <Compile Include="MenuItem.cs" />
-    <Compile Include="MenuScene.cs" />
-    <Compile Include="Scene.cs" />
-    <Compile Include="ShipView.cs" />
+    <Compile Include="Scenes\MenuItem.cs" />
+    <Compile Include="Scenes\MenuScene.cs" />
+    <Compile Include="Scenes\Scene.cs" />
+    <Compile Include="Scenes\ShipView.cs" />
     <Compile Include="Weapons\BombWeapon.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="Weapons\MorningstarWeapon.cs" />

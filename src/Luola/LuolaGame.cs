@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using luola.Scenes;
 using Luola.Weapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

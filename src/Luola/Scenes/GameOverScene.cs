@@ -10,11 +10,12 @@
 #endregion
 
 using System;
+using Luola;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Luola
+namespace luola.Scenes
 {
     public class GameOverScene : Scene
     {

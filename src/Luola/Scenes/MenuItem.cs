@@ -9,7 +9,7 @@
 
 #endregion
 
-namespace Luola
+namespace luola.Scenes
 {
     public delegate string OnSelected();
 

@@ -9,10 +9,11 @@
 
 #endregion
 
+using Luola;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Luola
+namespace luola.Scenes
 {
     public abstract class Scene
     {

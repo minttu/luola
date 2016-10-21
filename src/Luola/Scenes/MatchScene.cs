@@ -12,12 +12,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Luola;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 
-namespace Luola
+namespace luola.Scenes
 {
     public class MatchScene : Scene
     {
@@ -94,9 +95,9 @@ namespace Luola
 
             var mapHeight = _match.MapSize.X;
             var mapWidth = _match.MapSize.Y;
-            var eachWidth = ((LuolaGame) Game).GraphicsDeviceManager.PreferredBackBufferWidth/split.Item1;
+            var eachWidth = Game.GraphicsDeviceManager.PreferredBackBufferWidth/split.Item1;
             eachWidth = Math.Min(eachWidth, mapWidth);
-            var eachHeight = ((LuolaGame) Game).GraphicsDeviceManager.PreferredBackBufferHeight/split.Item2;
+            var eachHeight = Game.GraphicsDeviceManager.PreferredBackBufferHeight/split.Item2;
             eachHeight = Math.Min(eachHeight, mapHeight);
 
             for (var i = 0; i < _match.Ships.Count; i++)
@@ -116,8 +117,8 @@ namespace Luola
 
         protected override void Dispose()
         {
-            var width = ((LuolaGame) Game).GraphicsDeviceManager.PreferredBackBufferWidth;
-            var height = ((LuolaGame) Game).GraphicsDeviceManager.PreferredBackBufferHeight;
+            var width = Game.GraphicsDeviceManager.PreferredBackBufferWidth;
+            var height = Game.GraphicsDeviceManager.PreferredBackBufferHeight;
             Game.GraphicsDevice.Viewport = new Viewport(new Rectangle(0, 0, width, height));
             _match.Dispose();
         }

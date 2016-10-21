@@ -9,11 +9,12 @@
 
 #endregion
 
+using Luola;
 using Luola.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Luola
+namespace luola.Scenes
 {
     public class ShipView
     {

@@ -13,11 +13,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Luola;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Luola
+namespace luola.Scenes
 {
     public class MenuScene : Scene
     {
