@@ -27,7 +27,7 @@ namespace Luola
         private int _mapSelection;
         private int _players;
 
-        public MenuScene(Game game) : base(game)
+        public MenuScene(LuolaGame game) : base(game)
         {
             _itemSelection = 0;
             _items = new List<MenuItem>();
@@ -74,15 +74,15 @@ namespace Luola
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             var width = spriteBatch.GraphicsDevice.Viewport.Width;
-            LuolaGame.FontManager.DrawText(spriteBatch, "luola", new Vector2(width/2, 100), Color.White,
+            Game.FontManager.DrawText(spriteBatch, "luola", new Vector2(width/2, 100), Color.White,
                 4f + (float) Math.Sin(gameTime.TotalGameTime.TotalSeconds)/6, floaty: true,
                 gameTime: (float) gameTime.TotalGameTime.TotalSeconds);
 
             for (var i = 0; i < _items.Count; i++)
             {
                 if (i == _itemSelection)
-                    spriteBatch.Draw(LuolaGame.BaseTexture, new Rectangle(0, 188 + i*30, width, 24), Color.White);
-                LuolaGame.FontManager.DrawText(spriteBatch, _items[i].Text, new Vector2(width/2, 200 + i*30),
+                    spriteBatch.Draw(Game.BaseTexture, new Rectangle(0, 188 + i*30, width, 24), Color.White);
+                Game.FontManager.DrawText(spriteBatch, _items[i].Text, new Vector2(width/2, 200 + i*30),
                     _itemSelection == i ? Color.Black : Color.White, 2f);
             }
 
@@ -91,20 +91,20 @@ namespace Luola
 
         public override void Update(GameTime gameTime)
         {
-            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Down))
+            if (Game.InputManager.IsKeyNewlyDown(Keys.Down))
                 _itemSelection = Math.Min(_itemSelection + 1, _items.Count - 1);
-            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Up))
+            if (Game.InputManager.IsKeyNewlyDown(Keys.Up))
                 _itemSelection = Math.Max(_itemSelection - 1, 0);
-            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Enter))
+            if (Game.InputManager.IsKeyNewlyDown(Keys.Enter))
                 _items[_itemSelection].Select();
-            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Escape))
+            if (Game.InputManager.IsKeyNewlyDown(Keys.Escape))
                 if (_itemSelection != _items.Count - 1)
                     _itemSelection = _items.Count - 1;
                 else
                     _items[_itemSelection].Select();
         }
 
-        public override void Dispose()
+        protected override void Dispose()
         {
         }
     }

@@ -39,7 +39,7 @@ namespace Luola.Weapons
 
     internal class MorningstarProjectile : Projectile
     {
-        public MorningstarProjectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime time)
+        public MorningstarProjectile(LuolaGame game, Vector2 position, Vector2 direction, Entity owner, GameTime time)
             : base(game, position, direction, owner, time)
         {
             Damage = 20;
@@ -64,7 +64,7 @@ namespace Luola.Weapons
 
     internal class MorningstarSubProjectile : Projectile
     {
-        public MorningstarSubProjectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime time)
+        public MorningstarSubProjectile(LuolaGame game, Vector2 position, Vector2 direction, Entity owner, GameTime time)
             : base(game, position, direction, owner, time)
         {
             Damage = 2;

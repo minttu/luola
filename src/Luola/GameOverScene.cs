@@ -20,7 +20,7 @@ namespace Luola
     {
         private readonly string _winner;
 
-        public GameOverScene(Game game, string winner) : base(game)
+        public GameOverScene(LuolaGame game, string winner) : base(game)
         {
             _winner = winner;
         }
@@ -32,7 +32,7 @@ namespace Luola
             var width = spriteBatch.GraphicsDevice.Viewport.Width;
             var height = spriteBatch.GraphicsDevice.Viewport.Height;
             var str = _winner.Length > 0 ? "Winner is the " + _winner + " player" : "Draw!";
-            LuolaGame.FontManager.DrawText(spriteBatch, str, new Vector2(width/2, height/2), Color.White,
+            Game.FontManager.DrawText(spriteBatch, str, new Vector2(width/2, height/2), Color.White,
                 4f + (float) Math.Sin(gameTime.TotalGameTime.TotalSeconds)/6, floaty: true,
                 gameTime: (float) gameTime.TotalGameTime.TotalSeconds);
 
@@ -41,11 +41,11 @@ namespace Luola
 
         public override void Update(GameTime gameTime)
         {
-            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Enter))
+            if (Game.InputManager.IsKeyNewlyDown(Keys.Enter))
                 ChangeScene(new MenuScene(Game));
         }
 
-        public override void Dispose()
+        protected override void Dispose()
         {
         }
     }

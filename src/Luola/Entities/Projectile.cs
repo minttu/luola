@@ -16,7 +16,7 @@ namespace Luola.Entities
 {
     public abstract class Projectile : Entity
     {
-        public Projectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime time) : base(game)
+        protected Projectile(LuolaGame game, Vector2 position, Vector2 direction, Entity owner, GameTime time) : base(game)
         {
             Speed = 400f;
             Position = position;
@@ -34,7 +34,7 @@ namespace Luola.Entities
 
         public float CreatedAt { get; }
 
-        public int Weight { get; set; }
+        protected int Weight { get; set; }
 
         protected int DestructionSize { get; set; }
         public int Damage { get; protected set; }
@@ -44,11 +44,11 @@ namespace Luola.Entities
             set { Velocity = Direction*value; }
         }
 
-        protected Vector2 Velocity { get; set; }
+        private Vector2 Velocity { get; set; }
         public Entity Owner { get; }
         protected Texture2D Texture { get; set; }
-        protected Vector2 Direction { get; set; }
-        public bool FriendlyFire { get; protected set; }
+        private Vector2 Direction { get; }
+        protected bool FriendlyFire { get; set; }
 
         private Rectangle Rectangle
             =>
@@ -73,7 +73,7 @@ namespace Luola.Entities
         public override void Collided(GameTime gameTime, float x, float y)
         {
             Kill(gameTime);
-            Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(DestructionSize),
+            Match.AddDestruction(new Destruction(Game.DestructionTypeManager.GetDestructionType(DestructionSize),
                 new Vector2(x, y), Damage, Owner, FriendlyFire));
         }
     }

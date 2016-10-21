@@ -20,7 +20,7 @@ namespace Luola.Entities
         private bool _colliding;
         private float _rotation;
 
-        public Ship(Game game, string name, Color color, Vector2 position) : base(game)
+        public Ship(LuolaGame game, string name, Color color, Vector2 position) : base(game)
         {
             Name = name;
             Position = position;
@@ -35,7 +35,7 @@ namespace Luola.Entities
             CollideOutside = true;
             Texture = game.Content.Load<Texture2D>("ship");
 
-            PrimaryWeapon = LuolaGame.WeaponManager.InitWeapon("pellet", this);
+            PrimaryWeapon = Game.WeaponManager.InitWeapon("pellet", this);
         }
 
         public string Name { get; }
@@ -77,7 +77,7 @@ namespace Luola.Entities
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Rectangle, null, Color, _rotation, new Vector2(16f, 16f), SpriteEffects.None, 0.5f);
-            spriteBatch.Draw(LuolaGame.BaseTexture, new Rectangle((Position - Vector2.One).ToPoint(), new Point(2, 2)),
+            spriteBatch.Draw(Game.BaseTexture, new Rectangle((Position - Vector2.One).ToPoint(), new Point(2, 2)),
                 null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.51f);
         }
 
@@ -120,7 +120,7 @@ namespace Luola.Entities
         public override void Kill(GameTime gameTime)
         {
             base.Kill(gameTime);
-            Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(64), Position, 20,
+            Match.AddDestruction(new Destruction(Game.DestructionTypeManager.GetDestructionType(64), Position, 20,
                 this, false));
         }
 

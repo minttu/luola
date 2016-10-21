@@ -17,24 +17,24 @@ namespace Luola
 {
     public class Particle
     {
-        public readonly float CreatedAt;
-        public readonly bool IsAnimated;
-        public readonly Texture2D Texture;
-        public float Duration;
         public bool IsAlive;
-        public Vector2 Position;
+        private readonly float _createdAt;
+        private readonly bool _isAnimated;
+        private readonly Texture2D _texture;
+        private readonly float _duration;
+        private Vector2 _position;
 
         public Particle(GameTime gameTime, Vector2 position, Texture2D texture)
         {
-            CreatedAt = (float) gameTime.TotalGameTime.TotalSeconds;
+            _createdAt = (float) gameTime.TotalGameTime.TotalSeconds;
             IsAlive = true;
-            Duration = 0.3f;
-            IsAnimated = texture.Width != texture.Height;
-            Position = position;
-            Texture = texture;
+            _duration = 0.3f;
+            _isAnimated = texture.Width != texture.Height;
+            _position = position;
+            _texture = texture;
         }
 
-        public float ExpiresAt => CreatedAt + Duration;
+        private float ExpiresAt => _createdAt + _duration;
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -44,23 +44,23 @@ namespace Luola
                 return;
             }
 
-            if (!IsAnimated)
+            if (!_isAnimated)
             {
-                spriteBatch.Draw(Texture, Position, Color.White);
+                spriteBatch.Draw(_texture, _position, Color.White);
                 return;
             }
 
-            var height = Texture.Height;
-            var frames = Texture.Width/height;
+            var height = _texture.Height;
+            var frames = _texture.Width/height;
             var width = height;
-            var timePerFrame = Duration/frames;
-            var iter = (int) Math.Floor((gameTime.TotalGameTime.TotalSeconds - CreatedAt)/timePerFrame);
+            var timePerFrame = _duration/frames;
+            var iter = (int) Math.Floor((gameTime.TotalGameTime.TotalSeconds - _createdAt)/timePerFrame);
             if (iter >= frames)
             {
                 IsAlive = false;
                 return;
             }
-            spriteBatch.Draw(Texture, new Rectangle(Position.ToPoint(), new Point(width, height)),
+            spriteBatch.Draw(_texture, new Rectangle(_position.ToPoint(), new Point(width, height)),
                 new Rectangle(width*iter, 0, width, height), Color.White);
         }
     }

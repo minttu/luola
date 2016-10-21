@@ -16,7 +16,7 @@ namespace Luola.Entities
 {
     public abstract class Entity
     {
-        public Entity(Game game)
+        public Entity(LuolaGame game)
         {
             Position = Vector2.Zero;
             PreviousPosition = Vector2.Zero;
@@ -25,7 +25,7 @@ namespace Luola.Entities
             Game = game;
         }
 
-        public Game Game { get; private set; }
+        public LuolaGame Game { get; private set; }
         public Match Match { get; set; }
         public Vector2 Position { get; protected set; }
         public Vector2 PreviousPosition { get; protected set; }

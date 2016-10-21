@@ -19,11 +19,11 @@ namespace Luola
 {
     public class LuolaGame : Game
     {
-        public static Texture2D BaseTexture;
-        public static DestructionTypeManager DestructionTypeManager;
-        public static WeaponManager WeaponManager;
-        public static FontManager FontManager;
-        public static InputManager InputManager;
+        public Texture2D BaseTexture;
+        public DestructionTypeManager DestructionTypeManager;
+        public WeaponManager WeaponManager;
+        public FontManager FontManager;
+        public InputManager InputManager;
         public readonly GraphicsDeviceManager GraphicsDeviceManager;
 
         private SpriteBatch _spriteBatch;
@@ -37,7 +37,7 @@ namespace Luola
             IsMouseVisible = true;
         }
 
-        public Scene Scene { get; set; }
+        public Scene Scene { private get; set; }
 
         private void ClientSizeChanged(object sender, EventArgs e)
         {
@@ -65,7 +65,10 @@ namespace Luola
 
             DestructionTypeManager = new DestructionTypeManager(this);
             WeaponManager = new WeaponManager();
-            FontManager = new FontManager(this);
+
+            var fontTexture = Content.Load<Texture2D>("font");
+            FontManager = new FontManager(fontTexture);
+
             InputManager = new InputManager();
             Scene = new MenuScene(this);
         }

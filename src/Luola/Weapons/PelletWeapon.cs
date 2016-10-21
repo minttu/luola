@@ -37,7 +37,7 @@ namespace Luola.Weapons
 
     internal class PelletProjectile : Projectile
     {
-        public PelletProjectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime gameTime)
+        public PelletProjectile(LuolaGame game, Vector2 position, Vector2 direction, Entity owner, GameTime gameTime)
             : base(game, position, direction, owner, gameTime)
         {
             Damage = 3;

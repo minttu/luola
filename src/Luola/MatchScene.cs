@@ -24,7 +24,7 @@ namespace Luola
         private readonly Match _match;
         private readonly List<ShipView> _shipViews;
 
-        public MatchScene(Game game, int players, string mapName) : base(game)
+        public MatchScene(LuolaGame game, int players, string mapName) : base(game)
         {
             _shipViews = new List<ShipView>();
 
@@ -64,14 +64,14 @@ namespace Luola
 
         public override void Update(GameTime gameTime)
         {
-            if (LuolaGame.InputManager.IsKeyNewlyDown(Keys.Escape))
+            if (Game.InputManager.IsKeyNewlyDown(Keys.Escape))
             {
                 ChangeScene(new MenuScene(Game));
                 return;
             }
 
             for (var i = 0; i < _match.Ships.Count; i++)
-                LuolaGame.InputManager.InputForShip(_match.Ships[i], i);
+                Game.InputManager.InputForShip(_match.Ships[i], i);
 
             _match.Update(gameTime);
 
@@ -114,7 +114,7 @@ namespace Luola
             }
         }
 
-        public override void Dispose()
+        protected override void Dispose()
         {
             var width = ((LuolaGame) Game).GraphicsDeviceManager.PreferredBackBufferWidth;
             var height = ((LuolaGame) Game).GraphicsDeviceManager.PreferredBackBufferHeight;

@@ -20,7 +20,7 @@ namespace Luola.Weapons
         public static float ChanceToAppear = 0;
         private float _lastActivated;
 
-        public Weapon(Ship owner)
+        protected Weapon(Ship owner)
         {
             _lastActivated = 0;
             Owner = owner;

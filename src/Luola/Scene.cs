@@ -16,21 +16,21 @@ namespace Luola
 {
     public abstract class Scene
     {
-        public Scene(Game game)
+        protected Scene(LuolaGame game)
         {
             Game = game;
         }
 
-        public Game Game { get; set; }
+        protected LuolaGame Game { get; }
 
         protected void ChangeScene(Scene scene)
         {
             Dispose();
-            ((LuolaGame) Game).Scene = scene;
+            Game.Scene = scene;
         }
 
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
         public abstract void Update(GameTime gameTime);
-        public abstract void Dispose();
+        protected abstract void Dispose();
     }
 }

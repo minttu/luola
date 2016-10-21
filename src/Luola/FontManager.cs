@@ -19,12 +19,12 @@ namespace Luola
     {
         private readonly Texture2D _texture;
 
-        public FontManager(Game game)
+        public FontManager(Texture2D texture)
         {
-            _texture = game.Content.Load<Texture2D>("font");
+            _texture = texture;
         }
 
-        public Rectangle RectangleFor(char c)
+        private static Rectangle RectangleFor(char c)
         {
             var val = Convert.ToInt32(c);
             if ((val < 32) || (val > 126))
@@ -35,7 +35,7 @@ namespace Luola
             return new Rectangle(x*10, y*10, 10, 10);
         }
 
-        public void DrawCharacter(SpriteBatch spriteBatch, char c, Vector2 position, Color color, float size = 1f,
+        private void DrawCharacter(SpriteBatch spriteBatch, char c, Vector2 position, Color color, float size = 1f,
             float rotation = 0f)
         {
             spriteBatch.Draw(_texture, position, RectangleFor(c), color, rotation, Vector2.One*5, Vector2.One*size,

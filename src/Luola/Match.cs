@@ -19,14 +19,14 @@ namespace Luola
 {
     public class Match
     {
-        private readonly Game _game;
+        private readonly LuolaGame _game;
         private readonly Map _map;
         private readonly Random _random;
         private List<Entity> _entities;
         private List<Particle> _particles;
         public List<Ship> Ships;
 
-        public Match(Game game, Map map)
+        public Match(LuolaGame game, Map map)
         {
             _game = game;
             _map = map;

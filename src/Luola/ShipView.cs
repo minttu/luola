@@ -17,10 +17,10 @@ namespace Luola
 {
     public class ShipView
     {
-        private readonly Game _game;
+        private readonly LuolaGame _game;
         private readonly Ship _ship;
 
-        public ShipView(Game game, Ship ship)
+        public ShipView(LuolaGame game, Ship ship)
         {
             _game = game;
             _ship = ship;
@@ -39,8 +39,7 @@ namespace Luola
             cameraPos = new Vector2(MathHelper.Clamp(cameraPos.X, -mapWidth + _game.GraphicsDevice.Viewport.Width, 0f),
                 MathHelper.Clamp(cameraPos.Y, -mapHeight + _game.GraphicsDevice.Viewport.Height, 0f));
             var transformMatrix = Matrix.CreateTranslation(new Vector3(cameraPos, 0f));
-            spriteBatch.Begin(transformMatrix: transformMatrix, blendState: BlendState.NonPremultiplied,
-                sortMode: SpriteSortMode.Deferred);
+            spriteBatch.Begin(transformMatrix: transformMatrix, blendState: BlendState.NonPremultiplied);
 
             _ship.Match.Draw(gameTime, spriteBatch, cameraPos);
 
@@ -52,12 +51,12 @@ namespace Luola
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             var rectangle = new Rectangle(0, 0, spriteBatch.GraphicsDevice.Viewport.Width, 24);
-            spriteBatch.Draw(LuolaGame.BaseTexture, rectangle, Color.Black);
+            spriteBatch.Draw(_game.BaseTexture, rectangle, Color.Black);
             rectangle = new Rectangle(0, 2,
                 (int) (_ship.Health/(float) _ship.MaxHealth*spriteBatch.GraphicsDevice.Viewport.Width), 20);
-            spriteBatch.Draw(LuolaGame.BaseTexture, rectangle, Color.White);
+            spriteBatch.Draw(_game.BaseTexture, rectangle, Color.White);
 
-            LuolaGame.FontManager.DrawText(spriteBatch, _ship.Health + "/" + _ship.MaxHealth,
+            _game.FontManager.DrawText(spriteBatch, _ship.Health + "/" + _ship.MaxHealth,
                 new Vector2(spriteBatch.GraphicsDevice.Viewport.Width/2, 11), Color.Black, 2f, 0);
 
             spriteBatch.End();

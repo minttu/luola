@@ -25,7 +25,7 @@ namespace Luola.Entities
         private string _weaponName;
         public bool Active;
 
-        public Pickup(Game game, Vector2 position) : base(game)
+        public Pickup(LuolaGame game, Vector2 position) : base(game)
         {
             Position = position;
             _originalPosition = position;
@@ -38,7 +38,7 @@ namespace Luola.Entities
         {
             _pickupTime = -1;
             Active = true;
-            _weaponName = LuolaGame.WeaponManager.RandomWeaponName();
+            _weaponName = Game.WeaponManager.RandomWeaponName();
         }
 
         public override void Update(GameTime gameTime)
@@ -66,7 +66,7 @@ namespace Luola.Entities
             spriteBatch.Draw(_texture, Position, null, null, Vector2.One*6, 0f, null, Color.White, SpriteEffects.None,
                 0f);
 
-            LuolaGame.FontManager.DrawText(spriteBatch, _weaponName[0].ToString(), Position + Vector2.UnitX*5,
+            Game.FontManager.DrawText(spriteBatch, _weaponName[0].ToString(), Position + Vector2.UnitX*5,
                 Color.White);
         }
 
@@ -79,7 +79,7 @@ namespace Luola.Entities
             if (!Active)
                 return null;
 
-            return LuolaGame.WeaponManager.InitWeapon(_weaponName, ship);
+            return Game.WeaponManager.InitWeapon(_weaponName, ship);
         }
 
         public override void Kill(GameTime gameTime)

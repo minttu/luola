@@ -35,8 +35,8 @@ namespace Luola
             _destructions = new List<Destruction>();
         }
 
-        public int Height { get; set; }
-        public int Width { get; set; }
+        public int Height { get; }
+        public int Width { get; }
         public Match Match { get; set; }
 
         private List<MapPointData> Points { get; }
