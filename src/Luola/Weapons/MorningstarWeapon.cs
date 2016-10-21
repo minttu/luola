@@ -30,45 +30,47 @@ namespace Luola.Weapons
         {
             base.Activate(gameTime);
 
-            var projectile = new MorningstarProjectile(Owner.Game, Owner.FrontPosition, Owner.Direction, Owner);
+            var projectile = new MorningstarProjectile(Owner.Game, Owner.Position, Owner.Direction, Owner, gameTime);
             Owner.Match.AddEntity(projectile);
         }
     }
 
     internal class MorningstarProjectile : Projectile
     {
-        public MorningstarProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
-            : base(game, position, direction, owner)
+        public MorningstarProjectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime time)
+            : base(game, position, direction, owner, time)
         {
             Damage = 20;
             DestructionSize = 32;
             Speed = 250f;
+            Weight = 10;
             Texture = game.Content.Load<Texture2D>("weapons/morningstar_projectile.png");
         }
 
-        public override void Kill()
+        public override void Kill(GameTime gameTime)
         {
             const int projectiles = 32;
             for (var i = 0; i < projectiles; i++)
             {
                 var dir = Vector2.Transform(-Vector2.UnitY, Matrix.CreateRotationZ((float) (Math.PI*2/projectiles*i)));
-                var projectile = new MorningstarSubProjectile(Owner.Game, Position, dir, Owner);
+                var projectile = new MorningstarSubProjectile(Owner.Game, Position, dir, Owner, gameTime);
                 Owner.Match.AddEntity(projectile);
             }
-            base.Kill();
+            base.Kill(gameTime);
         }
     }
 
     internal class MorningstarSubProjectile : Projectile
     {
-        public MorningstarSubProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
-            : base(game, position, direction, owner)
+        public MorningstarSubProjectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime time)
+            : base(game, position, direction, owner, time)
         {
             Damage = 2;
             DestructionSize = 4;
             Speed = 150f;
             Weight = 10;
             Texture = game.Content.Load<Texture2D>("weapons/pellet_projectile.png");
+            GraceTime = 0f;
         }
     }
 }

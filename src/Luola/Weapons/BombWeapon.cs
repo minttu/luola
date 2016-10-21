@@ -29,21 +29,22 @@ namespace Luola.Weapons
         {
             base.Activate(gameTime);
 
-            var projectile = new BombProjectile(Owner.Game, Owner.BackPosition, Owner.Direction, Owner);
+            var projectile = new BombProjectile(Owner.Game, Owner.Position, Owner.Direction, Owner, gameTime);
             Owner.Match.AddEntity(projectile);
         }
     }
 
     internal class BombProjectile : Projectile
     {
-        public BombProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
-            : base(game, position, direction, owner)
+        public BombProjectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime time)
+            : base(game, position, direction, owner, time)
         {
             Damage = 10;
             DestructionSize = 32;
             Speed = 0;
             Texture = game.Content.Load<Texture2D>("weapons/bomb_projectile.png");
             Weight = 10;
+            GraceTime = 2f;
         }
     }
 }

@@ -105,40 +105,57 @@ namespace Luola.Entities
             weapon.Activate(gameTime);
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(GameTime gameTime, int damage)
         {
             Health -= damage;
             if (Health <= 0)
-                Kill();
+                Kill(gameTime);
         }
 
-        public override void Kill()
+        public override void Kill(GameTime gameTime)
         {
-            base.Kill();
+            base.Kill(gameTime);
             Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(64), Position, 20,
                 this, false));
         }
 
-        public override void Collided(float x, float y)
+        public override void Collided(GameTime gameTime, float x, float y)
         {
             if (Velocity.LengthSquared() > 50)
-                TakeDamage((int) Velocity.LengthSquared()/50);
+                TakeDamage(gameTime, (int) Velocity.LengthSquared()/50);
             Velocity = new Vector2(0, 0);
             _colliding = true;
             Position = new Vector2(x, y);
         }
 
-        public void CheckCollisionsWithProjectile(Projectile projectile)
+        public void CheckCollisionWithEntity(GameTime gameTime, Entity entity)
         {
+            var projectile = entity as Projectile;
+            if (projectile != null)
+                CheckCollisionsWithProjectile(gameTime, projectile);
+
+            var pickup = entity as Pickup;
+            if ((pickup != null) && pickup.Active)
+                CheckCollisionsWithPickup(gameTime, pickup);
+        }
+
+        private void CheckCollisionsWithProjectile(GameTime gameTime, Projectile projectile)
+        {
+            if (projectile.Owner == this)
+            {
+                if (projectile.CreatedAt + projectile.GraceTime > (float) gameTime.TotalGameTime.TotalSeconds)
+                    return;
+            }
+
             var dist = (projectile.Position - Position).LengthSquared();
             if (dist > 240)
                 return;
-
-            projectile.Kill();
-            TakeDamage(projectile.Damage);
+            
+            projectile.Kill(gameTime);
+            TakeDamage(gameTime, projectile.Damage);
         }
 
-        public void CheckCollisionsWithPickup(Pickup pickup)
+        private void CheckCollisionsWithPickup(GameTime gameTime, Pickup pickup)
         {
             var dist = (pickup.Position - Position).LengthSquared();
             if (dist > 240)
@@ -150,7 +167,7 @@ namespace Luola.Entities
                     PrimaryWeapon = weapon;
                 else
                     SecondaryWeapon = weapon;
-            pickup.Kill();
+            pickup.Kill(gameTime);
         }
     }
 }

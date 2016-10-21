@@ -72,7 +72,7 @@ namespace Luola
                             var point = ship.Position.ToPoint();
                             if ((point.X == rx) && (point.Y == ry) &&
                                 ((destruction.Owner != ship) || destruction.FriendlyFire))
-                                ship.TakeDamage(destruction.Damage);
+                                ship.TakeDamage(gameTime, destruction.Damage);
                         }
 
                         DynamicLayer.Colors[rx + ry*Width] = Color.Transparent;
@@ -93,7 +93,7 @@ namespace Luola
                     SpriteEffects.None, 0.01f);
         }
 
-        public void CheckCollisions(Entity entity)
+        public void CheckCollisions(GameTime gameTime, Entity entity)
         {
             var x = entity.PreviousPosition.X;
             var y = entity.PreviousPosition.Y;
@@ -118,7 +118,7 @@ namespace Luola
                     y -= perStep.Y;
                 }
 
-                entity.Collided(x, y);
+                entity.Collided(gameTime, x, y);
                 return;
             }
         }

@@ -80,26 +80,12 @@ namespace Luola
             foreach (var entity in _entities.ToArray())
             {
                 entity.Update(gameTime);
-                _map.CheckCollisions(entity);
+                _map.CheckCollisions(gameTime, entity);
                 if (entity is Ship)
                     continue;
 
                 foreach (var ship in AliveShips)
-                {
-                    var projectile = entity as Projectile;
-                    if (projectile != null)
-                    {
-                        var bullet = projectile;
-                        if (!projectile.FriendlyFire && (bullet.Owner == ship))
-                            continue;
-
-                        ship.CheckCollisionsWithProjectile(projectile);
-                    }
-
-                    var pickup = entity as Pickup;
-                    if ((pickup != null) && pickup.Active)
-                        ship.CheckCollisionsWithPickup(pickup);
-                }
+                    ship.CheckCollisionWithEntity(gameTime, entity);
             }
             _entities = _entities.FindAll(entity => entity.IsAlive);
 

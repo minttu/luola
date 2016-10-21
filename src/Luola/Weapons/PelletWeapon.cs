@@ -30,15 +30,15 @@ namespace Luola.Weapons
         {
             base.Activate(gameTime);
 
-            var projectile = new PelletProjectile(Owner.Game, Owner.Position, Owner.Direction, Owner);
+            var projectile = new PelletProjectile(Owner.Game, Owner.Position, Owner.Direction, Owner, gameTime);
             Owner.Match.AddEntity(projectile);
         }
     }
 
     internal class PelletProjectile : Projectile
     {
-        public PelletProjectile(Game game, Vector2 position, Vector2 direction, Entity owner)
-            : base(game, position, direction, owner)
+        public PelletProjectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime gameTime)
+            : base(game, position, direction, owner, gameTime)
         {
             Damage = 3;
             DestructionSize = 7;

@@ -70,7 +70,7 @@ namespace Luola.Entities
                 Color.White);
         }
 
-        public override void Collided(float x, float y)
+        public override void Collided(GameTime gameTime, float x, float y)
         {
         }
 
@@ -82,7 +82,7 @@ namespace Luola.Entities
             return LuolaGame.WeaponManager.InitWeapon(_weaponName, ship);
         }
 
-        public override void Kill()
+        public override void Kill(GameTime gameTime)
         {
             Active = false;
         }

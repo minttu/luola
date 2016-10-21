@@ -16,7 +16,7 @@ namespace Luola.Entities
 {
     public abstract class Projectile : Entity
     {
-        public Projectile(Game game, Vector2 position, Vector2 direction, Entity owner) : base(game)
+        public Projectile(Game game, Vector2 position, Vector2 direction, Entity owner, GameTime time) : base(game)
         {
             Speed = 400f;
             Position = position;
@@ -26,9 +26,13 @@ namespace Luola.Entities
             Damage = 0;
             DestructionSize = 1;
             Weight = 1;
+            GraceTime = 0.5f;
             CollideOutside = false;
             FriendlyFire = true;
+            CreatedAt = (float) time.TotalGameTime.TotalSeconds;
         }
+
+        public float CreatedAt { get; }
 
         public int Weight { get; set; }
 
@@ -51,6 +55,8 @@ namespace Luola.Entities
             new Rectangle((Position - Vector2.One*(Texture.Width/2)).ToPoint(), new Point(Texture.Width, Texture.Height))
             ;
 
+        public float GraceTime { get; protected set; }
+
         public override void Update(GameTime gameTime)
         {
             PreviousPosition = Position;
@@ -64,9 +70,9 @@ namespace Luola.Entities
             spriteBatch.Draw(Texture, Rectangle, Color.White);
         }
 
-        public override void Collided(float x, float y)
+        public override void Collided(GameTime gameTime, float x, float y)
         {
-            Kill();
+            Kill(gameTime);
             Match.AddDestruction(new Destruction(LuolaGame.DestructionTypeManager.GetDestructionType(DestructionSize),
                 new Vector2(x, y), Damage, Owner, FriendlyFire));
         }

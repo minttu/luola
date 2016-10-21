@@ -32,13 +32,13 @@ namespace Luola.Entities
         public bool IsAlive { get; protected set; }
         public bool CollideOutside { get; protected set; }
 
-        public virtual void Kill()
+        public virtual void Kill(GameTime gameTime)
         {
             IsAlive = false;
         }
 
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
-        public abstract void Collided(float x, float y);
+        public abstract void Collided(GameTime gameTime, float x, float y);
     }
 }
