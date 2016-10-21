@@ -22,26 +22,37 @@ namespace Luola
         private readonly List<Destruction> _destructions;
         private readonly List<MapLayerData> _layers;
 
-        public Map(List<MapLayerData> layers)
+        public Map(MapData mapData)
         {
-            _layers = layers;
+            _layers = mapData.Layers;
+            Points = mapData.Points;
             SolidLayer = _layers.Find(layer => layer.Type == "solid");
             DynamicLayer = _layers.Find(layer => layer.Type == "dynamic");
-            Width = layers[0].Width;
-            Height = layers[0].Height;
-            foreach (var layer in layers)
+            Width = _layers[0].Width;
+            Height = _layers[0].Height;
+            foreach (var layer in _layers)
                 layer.CalculateCollisions();
             _destructions = new List<Destruction>();
         }
 
         public int Height { get; set; }
         public int Width { get; set; }
-        public List<List<int>> SpawnPoints { get; set; }
-        public List<List<int>> PickupPoints { get; set; }
         public Match Match { get; set; }
 
+        private List<MapPointData> Points { get; }
         private MapLayerData DynamicLayer { get; }
         private MapLayerData SolidLayer { get; }
+
+        public List<MapPointData> PointsOfType(string type)
+        {
+            return Points.FindAll(t => t.Type == type);
+        }
+
+        public MapPointData RandomPointOfType(Random random, string type)
+        {
+            var points = PointsOfType(type);
+            return points[random.Next(0, points.Count)];
+        }
 
         public void AddDestruction(Destruction destruction)
         {

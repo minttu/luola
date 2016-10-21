@@ -9,13 +9,17 @@
 
 #endregion
 
-using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Luola
 {
-    public class MapData
+    public class MapPointData
     {
-        public List<MapLayerData> Layers { get; set; }
-        public List<MapPointData> Points { get; set; }
+        public string Type { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public Point AsPoint => new Point(X, Y);
+        public Vector2 AsVector => new Vector2(X, Y);
     }
 }

@@ -55,17 +55,17 @@ namespace Luola
 
         public void CreateShip(string name, Color color)
         {
-            var spawnPoint = _map.SpawnPoints[_random.Next(0, _map.SpawnPoints.Count)];
-            var ship = new Ship(_game, name, color, new Vector2(spawnPoint[0], spawnPoint[1]));
+            var spawnPoint = _map.RandomPointOfType(_random, "spawn");
+            var ship = new Ship(_game, name, color, spawnPoint.AsVector);
             AddEntity(ship);
             Ships.Add(ship);
         }
 
         private void CreatePickups()
         {
-            foreach (var pos in _map.PickupPoints)
+            foreach (var pos in _map.PointsOfType("pickup"))
             {
-                var pickup = new Pickup(_game, new Vector2(pos[0], pos[1]));
+                var pickup = new Pickup(_game, pos.AsVector);
                 AddEntity(pickup);
             }
         }

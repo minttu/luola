@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="FontManager.cs" />
     <Compile Include="GameOverScene.cs" />
+    <Compile Include="MapPointData.cs" />
     <Compile Include="MatchScene.cs" />
     <Compile Include="Entities\Pickup.cs" />
     <Compile Include="MenuItem.cs" />

@@ -59,11 +59,7 @@ namespace Luola
                 layer.Texture = copy;
             }
 
-            return new Map(mapInfo.Layers)
-            {
-                SpawnPoints = mapInfo.SpawnPoints,
-                PickupPoints = mapInfo.PickupPoints
-            };
+            return new Map(mapInfo);
         }
 
         public override void Update(GameTime gameTime)
