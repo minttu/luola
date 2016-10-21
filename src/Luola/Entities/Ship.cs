@@ -87,6 +87,11 @@ namespace Luola.Entities
             Velocity += Vector2.Transform(new Vector2(0, -thrust), Matrix.CreateRotationZ(_rotation));
         }
 
+        public void ApplyVelocity(Vector2 vector)
+        {
+            Velocity += vector;
+        }
+
         public void ActivatePrimaryWeapon(GameTime gameTime)
         {
             ActivateWeapon(gameTime, PrimaryWeapon);
@@ -142,15 +147,13 @@ namespace Luola.Entities
         private void CheckCollisionsWithProjectile(GameTime gameTime, Projectile projectile)
         {
             if (projectile.Owner == this)
-            {
                 if (projectile.CreatedAt + projectile.GraceTime > (float) gameTime.TotalGameTime.TotalSeconds)
                     return;
-            }
 
             var dist = (projectile.Position - Position).LengthSquared();
             if (dist > 240)
                 return;
-            
+
             projectile.Kill(gameTime);
             TakeDamage(gameTime, projectile.Damage);
         }

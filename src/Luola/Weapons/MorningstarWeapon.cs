@@ -32,6 +32,8 @@ namespace Luola.Weapons
 
             var projectile = new MorningstarProjectile(Owner.Game, Owner.Position, Owner.Direction, Owner, gameTime);
             Owner.Match.AddEntity(projectile);
+
+            Owner.ApplyVelocity((Owner.Position - Owner.FrontPosition) / 2);
         }
     }
 
