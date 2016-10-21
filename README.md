@@ -1,4 +1,4 @@
-# luola
+# luola [![Windows build status](https://ci.appveyor.com/api/projects/status/cpivlysqiav2m0xk?svg=true)](https://ci.appveyor.com/project/minttu/luola) [![Linux build status](https://travis-ci.org/minttu/luola.svg?branch=master)](https://travis-ci.org/minttu/luola)
 
 cave shooting / flying game
 
