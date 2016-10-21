@@ -16,7 +16,8 @@ namespace Luola.Entities
 {
     public abstract class Projectile : Entity
     {
-        protected Projectile(LuolaGame game, Vector2 position, Vector2 direction, Entity owner, GameTime time) : base(game)
+        protected Projectile(LuolaGame game, Vector2 position, Vector2 direction, Entity owner, GameTime time)
+            : base(game)
         {
             Speed = 400f;
             Position = position;

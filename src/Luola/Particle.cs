@@ -17,12 +17,12 @@ namespace Luola
 {
     public class Particle
     {
-        public bool IsAlive;
         private readonly float _createdAt;
+        private readonly float _duration;
         private readonly bool _isAnimated;
         private readonly Texture2D _texture;
-        private readonly float _duration;
         private Vector2 _position;
+        public bool IsAlive;
 
         public Particle(GameTime gameTime, Vector2 position, Texture2D texture)
         {

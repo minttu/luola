@@ -20,14 +20,14 @@ namespace Luola
 {
     public class LuolaGame : Game
     {
-        public Texture2D BaseTexture;
-        public DestructionTypeManager DestructionTypeManager;
-        public WeaponManager WeaponManager;
-        public FontManager FontManager;
-        public InputManager InputManager;
         public readonly GraphicsDeviceManager GraphicsDeviceManager;
 
         private SpriteBatch _spriteBatch;
+        public Texture2D BaseTexture;
+        public DestructionTypeManager DestructionTypeManager;
+        public FontManager FontManager;
+        public InputManager InputManager;
+        public WeaponManager WeaponManager;
 
         public LuolaGame()
         {
