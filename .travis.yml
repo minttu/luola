@@ -1,2 +1,6 @@
 language: csharp
 solution: Luola.sln
+install:
+  - nuget restore
+script:
+  - xbuild
