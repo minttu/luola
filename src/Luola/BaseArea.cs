@@ -9,14 +9,20 @@
 
 #endregion
 
-using System.Collections.Generic;
+using Luola.Entities;
+using Microsoft.Xna.Framework;
 
-namespace Luola
+namespace luola
 {
-    public class MapData
+    public class BaseArea
     {
-        public List<MapLayer> Layers { get; set; }
-        public List<MapPoint> Points { get; set; }
-        public List<MapArea> Areas { get; set; }
+        public BaseArea(Rectangle rectangle)
+        {
+            Rectangle = rectangle;
+        }
+
+        public Rectangle Rectangle { get; }
+        public Ship OccupiedBy { get; set; }
+        public bool Occupied => OccupiedBy?.IsAlive == true;
     }
 }

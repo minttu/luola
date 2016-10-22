@@ -29,8 +29,8 @@ namespace luola.Scenes
         {
             _shipViews = new List<ShipView>();
 
-            var map = LoadMap(mapName);
-            _match = new Match(Game, map);
+            var mapData = LoadMapData(mapName);
+            _match = new Match(Game, mapData);
             var playerColors = new[] {Color.Blue, Color.Red, Color.Green, Color.Yellow};
             var playerNames = new[] {"Blue", "Red", "Green", "Yellow"};
 
@@ -41,7 +41,7 @@ namespace luola.Scenes
                 _shipViews.Add(new ShipView(Game, ship));
         }
 
-        private Map LoadMap(string name)
+        private MapData LoadMapData(string name)
         {
             var dataPath = Path.Combine(Game.Content.RootDirectory, "maps", name, "data.json");
 
@@ -60,7 +60,7 @@ namespace luola.Scenes
                 layer.Texture = copy;
             }
 
-            return new Map(mapInfo);
+            return mapInfo;
         }
 
         public override void Update(GameTime gameTime)

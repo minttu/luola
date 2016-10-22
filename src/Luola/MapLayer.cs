@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Luola
 {
-    public class MapLayerData
+    public class MapLayer
     {
         public string Image { get; set; }
         public string Type { get; set; }
@@ -43,6 +43,17 @@ namespace Luola
                     var solid = Colors[x + Width*y] != Color.Transparent;
                     Collisions[x, y] = solid;
                 }
+        }
+
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 cameraPos)
+        {
+            spriteBatch.Draw(Texture, cameraPos*-Parallax, null, Color.White, 0f, Vector2.Zero, 1f,
+                SpriteEffects.None, 0.01f);
+        }
+
+        public void UpdateTextureFromColors()
+        {
+            Texture.SetData(Colors);
         }
 
         public void Dispose()

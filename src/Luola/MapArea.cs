@@ -13,13 +13,14 @@ using Microsoft.Xna.Framework;
 
 namespace Luola
 {
-    public class MapPointData
+    public class MapArea
     {
         public string Type { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
-        public Point AsPoint => new Point(X, Y);
-        public Vector2 AsVector => new Vector2(X, Y);
+        public Rectangle AsRectangle => new Rectangle(X, Y, Width, Height);
     }
 }

@@ -63,9 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseArea.cs" />
     <Compile Include="FontManager.cs" />
+    <Compile Include="MapArea.cs" />
     <Compile Include="Scenes\GameOverScene.cs" />
-    <Compile Include="MapPointData.cs" />
+    <Compile Include="MapPoint.cs" />
     <Compile Include="Scenes\MatchScene.cs" />
     <Compile Include="Entities\Pickup.cs" />
     <Compile Include="Scenes\MenuItem.cs" />
@@ -83,9 +85,8 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="LuolaGame.cs" />
-    <Compile Include="Map.cs" />
     <Compile Include="MapData.cs" />
-    <Compile Include="MapLayerData.cs" />
+    <Compile Include="MapLayer.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
